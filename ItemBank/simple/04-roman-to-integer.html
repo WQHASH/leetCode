@@ -1,0 +1,44 @@
+<script>
+	// ***罗马数字转整数***
+	/**
+	 * 罗马数字包含以下七种字符: I:1， V:5， X:10， L:50，C:100，D:500 和 M:1000。
+	 * IV:4 IX:9  XL:40 XC:90 CD:400 CM:900 =>这几种是特例
+	 * 
+	 */
+
+	{
+		/**
+		 * @param {string} s
+		 * @return {number}
+		 * 123 {4} 678 {9} 
+		 */
+		var romanToInt = function(s) {
+			var hash = {
+				"I":1,
+				"X":10,
+				"C":100,
+				"M":1000,
+				"V":5,
+				"L":50,
+				"D":500
+			};
+			var sum = 0;
+			for(var i=0,len=s.length; i<len; i++){
+				var item = hash[s[i]];
+				var nextItem = i+1 === len?0:hash[s[i+1]];
+				if(nextItem>item){
+					sum += nextItem - item;
+					//这里i必须自增，因为用到了下一项的值进行求差，则当前的位置也就在该位置了
+					i++;
+				}else{
+					sum += item;
+				}
+					
+			}
+			return sum;
+		};
+
+		console.log(romanToInt("LVIII"))
+	}
+
+</script>
