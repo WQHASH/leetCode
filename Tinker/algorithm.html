@@ -1,0 +1,46 @@
+<script>
+// https://blog.csdn.net/wangbo1998/article/details/79804909
+
+// ===== 数组 ======
+
+
+/**
+ * 旋转数组:
+ * 	给定一个数组，将数组中的元素向右移动k个位置，其中k是非负数
+ * 	 As:输入 [1,2,3,4,5,6,7] 和 k = 3;
+ * 	 	输出 [5,6,7,1,2,3,4]
+ * 	 	尽可能想出更多方法，至少三种，使用空间复杂度为O(1)的原地算法
+ */
+(function(){
+	var arr = [2,3,4];
+	var rotate = function(arr, k){
+		var length =arr.length;
+		var newk = k%length;
+		var temp = 0;
+		for(var i=0;i<newk;i++){
+			temp = arr[length-1];
+			//从倒数第二个数字开始，倒叙循环。循环主要目的就是把其他数字位置都抬高一位  
+			//不从倒数第一个位，是因为，那样的话将没办法将其后面的数换位了，[因为整体要向右移动]
+			for(var j=length-2;j>=0;j--){
+				arr[j+1]=arr[j]
+			}
+			arr[0] = temp;
+		}
+
+		// console.log(arr,"rotate");
+	};
+
+	rotate(arr,2);
+
+
+})();
+
+(function(){
+
+})();
+
+
+
+
+	
+</script>

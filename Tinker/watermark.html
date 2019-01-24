@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title></title>
+      <link rel="stylesheet" href="">
+        <style>
+        html,
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body style="width: 1800px;">
+
+    <div style="width: 1000px;height:3500px;overflow: auto;margin:50px; ">
+
+       
+    </div>
+    <!-- <iframe src="demo1.html" style="border: 0px;width: 1600px;height: 700px;"></iframe> -->
+<script src="src/watermark.js"></script>
+ <script>
+        var showMarkText = "测试水印";
+        function Dateformat(fthis, fmt) {
+            var o = {
+                "M+": fthis.getMonth() + 1, //月份 
+                "d+": fthis.getDate(), //日 
+                "h+": fthis.getHours(), //小时 
+                "m+": fthis.getMinutes(), //分 
+                "s+": fthis.getSeconds(), //秒 
+                "q+": Math.floor((fthis.getMonth() + 3) / 3), //季度 
+                "S": fthis.getMilliseconds() //毫秒 
+            };
+            if (/(y+)/.test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (fthis.getFullYear() + "").substr(4 - RegExp.$1.length));
+            }
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(fmt)) {
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                }
+            }
+            return fmt;
+        }
+        var showText = showMarkText + "<br/>" + window.location.host + "<br/>" + Dateformat(new Date(),"yyyy-MM-dd hh:mm:ss");
+        // watermark.init({ watermark_txt: showText,watermark_width: 200 });
+         // setInterval(function () {
+         //     var showText1 = showMarkText+"<br/>" + window.location.host + "<br/>" + Dateformat(new Date(), "yyyy-MM-dd hh:mm:ss");
+         //     watermark.load({ watermark_txt: showText1, watermark_width: 200 });
+         // }, 5000); //每5秒刷新一次  5000的单位是毫秒
+
+          watermark.init({ watermark_txt: "xixiixixxixiixixxixiixixxixiixix",watermark_width: 100 });
+           // var showText1 = showMarkText+"<br/>" + window.location.host + "<br/>" + Dateformat(new Date(), "yyyy-MM-dd hh:mm:ss");
+           //   watermark.load({ watermark_txt: "showText1", watermark_width: 200 });
+    </script>
+</html>

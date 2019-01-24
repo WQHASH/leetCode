@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div class="two-way-bind" >
+		双向绑定: <input type="text" value="111">
+	</div>
+</body>
+<script src="lzFun.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+ <script>
+ 	var two = $(".two-way-bind")
+ 	if(false){
+		var twoSetAttr = two.attr("lz-Commonpersonselect","12");
+ 	}
+ 	
+ 	var twoGetAttr = two.attr("lz-Commonpersonselect");
+ 	console.log(twoGetAttr)
+ </script>
+</html>

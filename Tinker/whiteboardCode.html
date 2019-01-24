@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>白板编程</title>
+</head>
+<body>
+	<div id="container">
+	  <p>
+	  name:<input type="text" bindkey="userName">
+	  </p>
+	  <p>
+	  age:<input type="text" bindkey="age">
+	  </p>
+	<div>
+</body>
+<script src="src/jQuery.3.3-1.js"></script>
+<script>
+	/**
+	 * 1.已知数据结构 users，请实现语法支持users.unique() 能够按name字段去重，并输出数据结构为: ["a","b"]
+	 * 
+	 */
+	
+	(function(){
+
+		var users = [
+			{id:1, name:"a"},
+			{id:2, name:"a"},
+			{id:3, name:"b"},
+			{id:4, name:"b"},
+			{id:5, name:"a"}
+		];
+		Array.prototype.unique = function(){
+			var newArr = [];
+			for(var i=0;i<this.length;i++){
+				for(var j=0;j<this.length;j++){
+					if(i<this.length && this[i]["name"] == this[j]["name"]){
+						this.splice(j,1);
+					}
+				}
+				newArr.push(this[i]["name"]);
+			}
+			return newArr;
+
+		};
+		// console.log(users.unique());
+
+
+		// var unique = function(users){
+		// 	var newArr = [];
+		// 	for(var i=0;i<users.length;i++){
+		// 		for(var j=0;j<users.length;j++){
+		// 			if(i<users.length && users[i]["name"] == users[j]["name"]){
+		// 				users.splice(j,1);
+		// 			}
+		// 		}
+		// 		newArr.push(users[i]["name"]);
+		// 	}
+		// 	return newArr;
+		// };
+
+		// console.log(unique(users));
+
+
+	})();
+
+	/**
+	 * 2. 	diff算法
+	 * 3.	虚拟Dom实现
+	 * 4.	手写bind函数
+	 * 5.	函数节流防抖
+	 * 6.	对象创建Object.create() x
+	 */
+
+
+
+	 // apply call bind的区别： https://www.cnblogs.com/MECN/p/6601804.html
+	//bind方法碰到new的注意点
+	(function(){
+		// 也就是说通过new的方式创建一个对象，bind()函数在this层面长并不起作用 但bind的参数任然有用
+		function foo() {
+		    this.b = 100;
+		    // console.log(this.a);  
+		    return this.a;
+		}
+
+		var func =  foo.bind({a:1});
+		func();//1	// this => {a:"",b:""}
+		new func();//undefined  this => foo=={b:100}，可以看到此时上面的bind并不起作用 -->说明new内部修改this指向的优先级高于bind的
+	})();
+
+	 // 手写bind函数
+	(function(){
+
+		// if(!Function.prototype.bind){
+		// 	Function.prototype.bind = function(oThis){
+		// 		if(typeof this !== "function"){
+		// 			throw new TypeError("Function.prototype.bind -xxx")
+		// 		}
+		// 	};
+		// 	var aArgs = Array.prototype.slice.call(arguments, 1),
+		// 		fToBind = this,
+		// 		fNOP = function(){},
+		// 		fBound = function(){
+		// 			return fToBind.apply(this instanceof fNOP
+		// 				? this
+		// 				: oThis,
+		// 				aArgs.concat(Array.prototype.slice.call(arguments)));
+		// 		};
+		// 		fNOP.prototype = this.prototype;
+		// 		fBound.prototype = new fNOP();
+		// 		return fBound();
+		// };
+
+	})();
+
+	console.log("==========bind方法的理解=========");
+	(function(){
+		/**
+		 *	1. 输入:一个或多个参数，第一个参数为当前的this指向，其他的为传入的参数
+		 *  2. 输出:return出一个新函数，但功能和原函数功能一样
+		 * 
+		 *  注意点： new一个匿名函数穿件出来的子对象为空对象 正常使用的function
+		 *  
+		 *  关于bind方法的理解： https://blog.csdn.net/q3254421/article/details/82999718     
+		 *  instance理解: https://blog.csdn.net/cecilia620/article/details/71158048
+		 *  Instanceof运算符的第一个变量是一个对象，暂时称为A；第二个变量一般是一个函数，暂时称为B
+		 *  A instanceof B 理解: A.__proto__一直沿着原型链上找 能和 B.__proto__的找到相同对象的则为true
+		 *  instanceof的判断队则是：沿着A的proto这条线来找，同时沿着B的prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。    
+		 * 		*************  网站提到的 new 和bind绑定对象this优先级处理，下面已处理 *************
+		 *  注意，一个 绑定函数 也能使用 new 操作符创建对象,这种行为就像把原函数当成构造器，thisArg 参数无效。也就是 new 操作符修改 this 指向的优先级更高。
+		 */
+		Function.prototype.myBind = function(thisArg){
+			if(typeof this !== "function"){ return; }
+			//这里this 可以理解成当前调用的函数[或说当前调用myBind的对象，万物皆对象]
+			var _self = this;	
+			var args = Array.prototype.slice.call(arguments,1);
+			var fnNop = function(){
+				this.aa="xx";
+			};
+			//fnBuild里的this指向的是 fnBound生成的新对象 (因为new 原因)
+			var fnBuild = function(){
+				//这里说明如果this是myBind构造函数实例（改变原型后体现的）那么，new出的新对象将会继承 调用myBind的方法
+				//如果this不是myBind构造函数的实例 那么 myBind的第一个参数将会借用 (func) 当前调用myBind的方法属性
+				var _this = this instanceof _self?this:thisArg;  // fnBuild instanceof fun
+				return _self.apply(thisArg, args.concat(Array.prototype.slice.call(arguments)));
+			}
+			// 维护原型关系
+			if(this.prototype){
+				fnNop.prototype = this.prototype;
+			}
+
+			//构造函数原型的修改，那么子对象的__proto__也跟着修改，所以上边的继承判断才成立
+			// fnBuild.prototype = this.prototype;
+			fnBuild.prototype = new fnNop();
+			return fnBuild;
+		}
+		var obj = {};
+		function fun(name){
+			this.name = name;
+			this.age = 11;
+		};
+
+		var test = fun.myBind(obj);
+		test("旺旺");
+		// var f = new fun("wangqi");
+		var f = new test("wangqi");
+		
+
+		
+		console.log(obj,"obj");
+		console.log(f,"f")
+
+	})();
+
+	console.log("====hitch====");
+	(function(){
+		// 和虽然也能修改this指向，但这里只是一个回调的存在了，不会返回一个同原函数功能相同的新函数
+		var createBind = {
+			bind: function(scope, method){
+				return function(){
+					return method.apply(scope, arguments||[]);
+				}
+			},
+		};
+
+		var obj = {
+			say:function(){
+				// console.log(this,"say")				
+				setTimeout(createBind.bind(this,function(){
+					// console.log(this,"tiemout")
+				}))
+			}
+		};
+		obj.say()
+
+	})();
+
+
+	console.log("==========继承的理解=========");
+	(function(){
+			function parent(){
+				this.name="wangqi";
+			};
+			parent.prototype = {
+				say:function(){console.log("parentSay")}
+			};
+
+			function child(){};
+			function other(){};
+			other.prototype = parent.prototype;
+			// child.prototype = parent.prototype;
+			//父类的实例给子类的原型 实现继承
+			child.prototype = new other();
+			var c = new child();
+			console.log(c,"child");
+			console.log(c instanceof parent)
+	})();
+
+
+	console.log("==========函数节流防抖=========");
+	(function(){
+		
+
+	})();
+
+	console.log("==========mvvm双向绑定理解=========");
+	(function(){
+		window.Model={
+		    userName:"windy",
+		    age:34,
+		    skill:["javascript","html","css","jquery","node"],
+		     
+		}
+	  	function bindingModel(model,changeCallback){
+		    var propertiesMap={};
+		    model.__private={};
+		    function getFn(name){
+		      var result=this.__private[name]
+		      console.log("get value:"+name+"="+ result);
+		      return result;
+		    };
+		    function setFn(name,val){
+		      if(this.__private[name]!=val){
+		        console.log("set value:"+name+"="+val);
+		        this.__private[name]=val;
+		        if(changeCallback){
+		          changeCallback(name,val);
+		        }
+		      }
+		    };
+		    for(elem in model){
+		      if(model.hasOwnProperty(elem) && elem!="__private" && typeof(model[elem])!="function"){
+		        (function(propName,propValue){
+		          model.__private[propName]=propValue;// init value
+		          propertiesMap[propName]={
+		            get:function(){ return getFn.call(this,propName)},
+		            set:function(v){ return setFn.call(this,propName,v)},
+		            //value:model[elem],
+		            //writable: true,
+		            enumerable: true,
+		            configurable: true
+		          }
+		        })(elem,model[elem]);
+		      }
+		    }
+		    Object.defineProperties(model,propertiesMap)
+	  	}
+		function bindingBoth(model,dom){
+			//首次绑定元素 并对绑定元素改变监听
+		    dom.find("[bindkey]").each(function(item){
+		      var key=$(this).attr("bindkey");
+		      // 首次给input赋值
+		      $(this).val(model[key]);
+		      // 监听input改变
+		      $(this).bind("input",function(){
+		        model[key]=$(this).val();
+		      })
+		    });
+		    bindingModel(model,function(name,val){
+		      var el=dom.find("[bindkey="+name+"]");
+		      if(el.val()!=val){
+		        el.val(val);
+		      }
+		       
+		    });
+		}
+	    bindingBoth(window.Model,$("#container"))
+	})();
+</script>
+</html>
