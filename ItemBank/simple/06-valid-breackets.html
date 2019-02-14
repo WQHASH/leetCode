@@ -1,0 +1,36 @@
+<script>
+// 	给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+
+// 有效字符串需满足：
+
+// 左括号必须用相同类型的右括号闭合。
+// 左括号必须以正确的顺序闭合。
+// 
+//As: 我们本文中看到的算法可用于处理编译器正在编译的程序中的所有括号，并检查是否所有括号都已配对。这将检查给定的括号字符串是否有效，是一个重要的编程问题
+	/**
+ 	* @param {string} s
+ 	* @return {boolean}
+ 	*/
+	var isValid = function(s) {
+    	var sta = [];
+    	var target = {
+    		"(": ")",
+    		"[": "]",
+    		"{": "}",
+    	};
+    	for(var i=0;i<s.length;i++){
+    		if(!sta.length){
+    			sta.push(s[i]);
+    		} else {
+    			if(s[i] === target[sta[sta.length-1]]){
+    				sta.pop();
+    			}else{
+    				sta.push(s[i]);
+    			}
+    		}
+    	}
+    	return !sta.length;
+	};
+	var str = "((({})))";
+	console.log(isValid(str));
+</script>
