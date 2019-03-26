@@ -25,7 +25,7 @@ function AutodeskNamespace(s) {
         ns[parts[i]] = ns[parts[i]] || {};
         ns = ns[parts[i]];
     }
-
+    // console.log(Autodesk,"Autodesk");
     return ns;
 };
 
@@ -39,13 +39,14 @@ AutodeskNamespace("Autodesk.Viewing.Shaders");
 AutodeskNamespace('Autodesk.Viewing.UI');
 
 AutodeskNamespace('Autodesk.LMVTK');
-
 Autodesk.Viewing.getGlobal = getGlobal;
 Autodesk.Viewing.AutodeskNamespace = AutodeskNamespace;
 getGlobal().AutodeskNamespace = AutodeskNamespace;
 
-})();;// Map wgs.js symbols back to Autodesk namespaces for backwards compatibility.
-// If the worker parameter is true, only worker-specific symbols are mapped.
+})();;
+//wq: 把wgs.js中的方法扩展到 Autodesk 中
+// Map wgs.js symbols back to Autodesk namespaces for backwards compatibility. 将wgs.js符号映射回Autodesk名称空间以实现向后兼容性。
+// If the worker parameter is true, only worker-specific symbols are mapped.  如果worker参数为true，则只映射特定于worker的符号。
 Autodesk.Viewing.Private.initializeLegacyNamespaces = function(worker) {
     var av = Autodesk.Viewing;
     var avs = av.Shaders;
@@ -310,7 +311,7 @@ if (typeof window !== "undefined")
     window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
 
 
-// Launch full screen on the given element with the available method
+// Launch full screen on the given element with the available method  使用可用方法在给定元素上全屏启动
 var launchFullscreen = av.launchFullscreen = function(element, options) {
     if (element.requestFullscreen) {
         element.requestFullscreen(options);

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //通过循环的方式，构成树结构
+    (function () {
+
+        function getGlobal() {
+            return (typeof window !== "undefined" && window !== null)
+                ? window
+                : (typeof self !== "undefined" && self !== null)
+                    ? self
+                    : global;
+        }
+        /**
+         * Create namespace
+         * @param {string} s - namespace (e.g. 'Autodesk.Viewing')
+         * @return {Object} namespace
+         */
+        function AutodeskNamespace(s) {
+            var ns = getGlobal();
+            console.log(ns)
+            var parts = s.split('.');
+            for (var i = 0; i < parts.length; ++i) {
+                ns[parts[i]] = ns[parts[i]] || {};
+                ns = ns[parts[i]];
+            }
+            return ns;
+        };
+        // Define the most often used ones
+        AutodeskNamespace("Autodesk.Viewing.Private");
+
+        AutodeskNamespace("Autodesk.Viewing.Extensions");
+
+        AutodeskNamespace("Autodesk.Viewing.Shaders");
+
+        AutodeskNamespace('Autodesk.Viewing.UI');
+
+        AutodeskNamespace('Autodesk.LMVTK');
+
+        Autodesk.Viewing.getGlobal = getGlobal;
+        Autodesk.Viewing.AutodeskNamespace = AutodeskNamespace;
+        getGlobal().AutodeskNamespace = AutodeskNamespace;
+
+    })();
+
+
+    //暴露原则，这里还需要和 以前的知识点相互比较理解???
+    (function(){
+        var objhash = {"wq":"wwww"};
+        var av = 1212;
+
+        window.objhash = objhash;
+   })();
+
+   (function(){
+
+        /***
+         *  new Fun时如果函数里有return 和不用时的区别：
+         *      用的话：子对象就是构造函数有继承关系
+         *      不用： 构造函数单纯为函数而已
+         * 
+         * */
+
+        function Fun(){
+            this.a = "21"
+            return {
+                "sname":"wq",
+                "sage":"123",
+            };
+        };
+
+        var fun = new Fun();
+        console.log(fun instanceof Fun,"fun");
+
+    
+   })();
+</script>
+
+</html>
