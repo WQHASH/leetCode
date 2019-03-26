@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=no" />
+    <title>BimAngle.com</title>
+    <link rel="stylesheet" type="text/css" href="scripts/forgeLib/style.min.css">
+    <script src="scripts/common/jquery-3.2.1.js"></script>
+    <script src="scripts/forgeLib/polyfill.js"></script>
+    <script src="scripts/forgeLib/viewer3D.js"></script>
+</head>
+<body style="margin:0px">
+    <div id="viewer-local"></div>
+    <script>
+        var bimEngine;
+        function setDataSource(option, callBack) {
+            // debugger;
+            document.getElementById("viewer-local").innerHTML = "";
+            var modelname = option.modelname;
+            var viewname = option.viewname;
+            var config = {
+                extensions: [
+                    "Autodesk.Viewing.ZoomWindow"
+                ],
+                disabledExtensions: {
+                    measure: false,
+                    section: false,
+                },
+                memory: {
+                    limit: 32 * 1024    //32 GB
+                }
+            };
+            var path = "data/forge/Resource/" + viewname + "/" + modelname + ".svf";
+            var element = document.getElementById('viewer-local');
+            bimEngine = new Autodesk.Viewing.Private.GuiViewer3D(element, config);
+
+            var options = {
+                docid: path,
+                env: 'Local',
+                offline: 'true',
+                useADP: false,
+                language: 'zh-HANS'
+            };
+
+            Autodesk.Viewing.Initializer(options, function () {
+                bimEngine.start();
+                bimEngine.load(options.docid, undefined, onLoadSuccess, onLoadError);
+            });
+
+            /*
+            @ 加载完成事件
+            */
+            function onLoadSuccess(event) {
+                bimEngine.setLightPreset(0); // 设置默认场景为‘简单灰’
+
+                console.log('场景加载完成！');
+
+
+                //add by gs 隐藏部分按钮
+                bimEngine.toolbar && (bimEngine.toolbar._controls[0].container.style.display = "none");
+                bimEngine.toolbar && (bimEngine.toolbar._controls[1]._controls[0].container.style.display = "block");
+                bimEngine.toolbar && (bimEngine.toolbar._controls[2]._controls[0].container.style.display = "none");
+                bimEngine.toolbar && (bimEngine.toolbar._controls[2]._controls[1].container.style.display = "none");
+                bimEngine.toolbar && (bimEngine.toolbar._controls[2]._controls[3].container.style.display = "none");
+                target = bimEngine.navigation.setReverseZoomDirection(true);//设置鼠标操作方式
+            }
+
+            function onLoadError(event) {
+                console.log('fail');
+            }
+            callBack && callBack();
+        }
+        window.onload = function () {
+            var option = {
+                modelname: "_3D_",
+                viewname: "3D_View"
+            };
+            setDataSource(option, function (data) {
+                console.log("初始化完成！");
+            });
+        }
+    </script>
+</body>
+</html>
