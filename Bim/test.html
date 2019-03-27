@@ -6,14 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <button id="full_screen">全屏</button>
+    <button id="normal">正常</button>
 </head>
 
 <body>
 
 </body>
 <script>
-    //通过循环的方式，构成树结构
+    //通过循环的方式，构成树结构 (主要体现在这里的ns对象一直都在变,为上一次的值)
+    //注意最后一次返回的是倒数第二次的 ns,但是都是挂载在window下的空对象 {}，所以 return 后能找到window下的所有方法
     (function () {
+        /***    
+         *  window = {
+         *      Autodesk:{}
+         *  }
+         *  window = window.Autodesk
+         * 
+         *  window = {
+         *      Autodesk:{ Viewing: {} }
+         *  }
+         *  window = window.Autodesk.Viewing
+         * */
 
         function getGlobal() {
             return (typeof window !== "undefined" && window !== null)
@@ -29,7 +43,6 @@
          */
         function AutodeskNamespace(s) {
             var ns = getGlobal();
-            console.log(ns)
             var parts = s.split('.');
             for (var i = 0; i < parts.length; ++i) {
                 ns[parts[i]] = ns[parts[i]] || {};
@@ -56,14 +69,14 @@
 
 
     //暴露原则，这里还需要和 以前的知识点相互比较理解???
-    (function(){
-        var objhash = {"wq":"wwww"};
+    (function () {
+        var objhash = { "wq": "wwww" };
         var av = 1212;
 
         window.objhash = objhash;
-   })();
+    })();
 
-   (function(){
+    (function () {
 
         /***
          *  new Fun时如果函数里有return 和不用时的区别：
@@ -72,19 +85,57 @@
          * 
          * */
 
-        function Fun(){
+        function Fun() {
             this.a = "21"
             return {
-                "sname":"wq",
-                "sage":"123",
+                "sname": "wq",
+                "sage": "123",
             };
         };
 
         var fun = new Fun();
-        console.log(fun instanceof Fun,"fun");
+        console.log(fun instanceof Fun, "fun");
 
-    
-   })();
+
+    })();
+
+    //是不是全屏的API处理
+    (function () {
+        function launchFullScreen(element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
+        }
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozExitFullScreen) {
+                document.mozExitFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+
+        document.getElementById("full_screen").onclick = function () {
+            launchFullScreen(document.documentElement);
+        }
+        document.getElementById("normal").onclick = function () {
+            // document.fullscreenElement()：获取当前全屏的元素。 这里还需要做兼容处理
+            if (document.documentElement == document.fullscreenElement) {
+                // exitFullscreen();
+            } else {
+                console.log("不是全屏")
+            }
+        }
+
+    })();
+
 </script>
 
 </html>
