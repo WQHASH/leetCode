@@ -25,7 +25,6 @@ function AutodeskNamespace(s) {
         ns[parts[i]] = ns[parts[i]] || {};
         ns = ns[parts[i]];
     }
-    // console.log(Autodesk,"Autodesk");
     return ns;
 };
 
@@ -44,7 +43,7 @@ Autodesk.Viewing.AutodeskNamespace = AutodeskNamespace;
 getGlobal().AutodeskNamespace = AutodeskNamespace;
 
 })();;
-//wq: 把wgs.js中的方法扩展到 Autodesk 中
+//wq@201903291457: 把wgs.js中的方法扩展到 Autodesk 中
 // Map wgs.js symbols back to Autodesk namespaces for backwards compatibility. 将wgs.js符号映射回Autodesk名称空间以实现向后兼容性。
 // If the worker parameter is true, only worker-specific symbols are mapped.  如果worker参数为true，则只映射特定于worker的符号。
 Autodesk.Viewing.Private.initializeLegacyNamespaces = function(worker) {
@@ -75424,7 +75423,7 @@ var av = Autodesk.Viewing,
     // Offline resource prefix specified by viewer consumer (e.g. IOS web view). Used as prefix to concatenate with
     // each resource relative path to form the absolute path of each resource.
     avp.offlineResourcePrefix = null;
-
+    //wq@20190329: 根据当前开发的环境来获取需要加载的地址
     var LmvEndpoints = {
         local: {
             RTC:        ['https://rtc-dev.api.autodesk.com:443', 'https://lmv.autodesk.com:443'] //port # is required here.
@@ -75494,7 +75493,7 @@ var av = Autodesk.Viewing,
         }
     };
 
-
+    //wq@20190329: 初始化环境变量
     avp.initializeEnvironmentVariable = function (options) {
         var env;
 
@@ -75517,7 +75516,7 @@ var av = Autodesk.Viewing,
         if (options && options.offline && options.offline === "true") {
             avp.offline = true;
         }
-
+        //wq@20190329: 确定执行环境,本例子中走的是 env = Local;
         // If still not available, try to resolve the environment based on the url.
         //
         if (!env) {
@@ -75556,13 +75555,13 @@ var av = Autodesk.Viewing,
         }
 
         avp.env = env;
-
+        //wq@20190329: 初始化时在控制台中打印日志信息情况，相应代码> P.835
         if (typeof window !== "undefined") {
             avp.logger.info("Host name : " + window.location.hostname);
         }
         avp.logger.info("Environment initialized as : " + env);
     };
-
+    //wq@20190329: 初始化服务端口
     avp.initializeServiceEndPoints = function (options) {
 
         // Get endpoint.
@@ -75593,7 +75592,8 @@ var av = Autodesk.Viewing,
 
         var root;
         var scriptUrl;
-
+        // wq@201903291628: 该方法最终会得到一个script标签中src除去libList数组的地址传给root
+        // wq@201903291628: eg => http://127.0.0.1:3000/scripts/forgeLib/
         // TODO_NOP: this doesn't work for Polymer / Web Components
         for (var i=0; i<libList.length; i++) {
             var script = avp.getScript(libList[i]);
@@ -75607,7 +75607,7 @@ var av = Autodesk.Viewing,
 
         //Derive any custom version request
         LMV_RESOURCE_VERSION = "v" + LMV_VIEWER_VERSION;
-
+        // wq@201903291628: 返回url参数, 如果没有返回空字符串
         var version = avp.getParameterByNameFromPath("v", scriptUrl);
         if (version && version.length && version != LMV_RESOURCE_VERSION) {
             avp.logger.warn("Version string mismatch between requested and actual version: " + version + " vs. " + LMV_RESOURCE_VERSION + ". Using " + version);
@@ -76009,7 +76009,6 @@ var av = Autodesk.Viewing,
         }
     };
 
-
 // TODO:  This is here for now, until we find a better place for it.
 //
     /**
@@ -76381,6 +76380,7 @@ var av = Autodesk.Viewing,
             //avp.initializeProtein();
             avp.disableDocumentTouchSafari();
 
+            //wq@20190329: 按顺序加载渲染图纸所需的js文件    
             //Load Promise (IE11), three.js & wgs.js, then continue initialization
             avp.loadDependency('Promise', 'es6-promise.min.js', function() { // Usually a no-op
                 avp.loadDependency('THREE', 'three.js', function() {
