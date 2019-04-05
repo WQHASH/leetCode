@@ -27,6 +27,10 @@
     font-size: 30px;
     padding: 0 8px
   }
+  .my-control{
+    width: 50px;
+    height: 200px;
+  }
 </style>
 <link rel="stylesheet" href="src/maptalks.css">
 <script type="text/javascript" src="src/maptalks.js"></script>
@@ -303,12 +307,12 @@
           distanceTool.disable();
         }
       },{
-        
         item: '画多边形',
         click: function () {
           //取点，铺点
           // console.log(point, "画多边形")
           polygonVectorLayer.addTo(map);
+          drawTool.setMode('Polygon').enable();
           //禁用测量距离
           distanceTool.disable();
         }
@@ -334,51 +338,32 @@
     })
     toolBarLayer.addTo(map);
 
-
     
-    //扩展
-    function toolbar(text) {
-        var toolbar = new maptalks.control.Toolbar({
-          position: 'top-right',
-          items: [{
-            item: text,
-            click: function () {}
-          }]
-        });
-        return toolbar;
+    const options = {
+        'position' : 'top-right',
+        'content'  : 'My Control',
+        'testClick':function(){drawTool.setMode('Polygon').enable();}
+      };
+
+      class MyControl extends maptalks.control.Control {
+        //创建ui的dom元素
+        buildOn(map) {
+          var dom = maptalks.DomUtil.createEl('div', 'my-control');
+          // dom.innerText = this.options['content'];
+          dom.innerHTML = "<p style='font-size:16px;'>矩形</p><p onclick='options.testClick()' style='font-size:16px;'>多边形</p>"
+          return dom;
+        }
+        //添加控件的回调
+        onAdd(){}
+        //删除控件的回调
+        onRemove(){}
       }
-      var html = "<div style='background:pink;'> <span>距离量算</span> <br/> <span>面积计算</span> </div> "
-      toolbar(html).addTo(map);
-      class CustomTool extends maptalks.MapTool {
-        onEnable() {
-          this._markerLayer = new maptalks.VectorLayer('CustomTool_layer')
-            .addTo(this.getMap());
-        }
-
-        onDisable() {
-          if (this._markerLayer) {
-            this._markerLayer.remove();
-          }
-        }
-
-        getEvents() {
-          return {
-            'click': this._onClick,
-            'contextmenu': this._onRightClick
-          };
-        }
-
-        _onClick(param) {
-          this._markerLayer.addGeometry(new maptalks.Marker(param.coordinate));
-        }
-
-        _onRightClick(param) {
-          this._markerLayer.clear();
-        }
-      }
-
-      // var customTool = new CustomTool().addTo(map);
-
+      MyControl.mergeOptions(options);
+      var control = new MyControl({
+        'content'   : 'Hello, MyControl!'
+      });
+      map.addControl(control);
+      // control.addTo(drawTool);
 
 
 
