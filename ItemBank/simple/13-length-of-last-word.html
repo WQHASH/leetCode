@@ -1,0 +1,52 @@
+<script>
+    /**
+     *   给定一个仅包含大小写字母和空格 ' ' 的字符串，返回其最后一个单词的长度。
+     *   如果不存在最后一个单词，请返回 0 。
+     *   eg：    说明：一个单词是指由字母组成，但不包含任何空格的字符串。
+     *       输入: "Hello World"
+     *       输出: 5
+     **/
+
+    var lengthOfLastWord = function (str) {
+        str = String(str).trim();
+        if (str.length == 0) {
+            return 0
+        };
+        var strNew = str.split(" ");
+        if (strNew[strNew.length - 1].length == 0) {
+            strNew.pop();
+            lengthOfLastWord(strNew)
+        } else {
+            return strNew[strNew.length - 1].length;
+        }
+    };
+
+    var str = "Hello World";
+    // console.log(lengthOfLastWord(str),"str-length");
+
+
+
+    (function () {
+        var lengthOfLastWord = function (s) {
+            //除去两边的空格计算
+            s = s.trim();
+            //中间空格去除,避免空字符的计算
+            var _str = s.replace(/\s/g, '');
+            if (!_str.length) {
+                return 0;
+            };
+            for (var i = s.length; i--;) {
+                if (s[i] === ' ') {
+                    return s.length - i - 1;
+                }
+                if (i === 0) {
+                    return s.length - i;
+                }
+            };
+        };
+
+        var str = "Hello World";
+        console.log(lengthOfLastWord(str), "str-length");
+
+    })();
+</script>
