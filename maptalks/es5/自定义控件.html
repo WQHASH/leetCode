@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>拖拽测试</title>
+  <style type="text/css">
+    html,
+    body {
+      margin: 0px;
+      height: 100%;
+      width: 100%
+    }
+
+    .container {
+      width: 100%;
+      height: 100%
+    }
+
+    .my-control {
+      -moz-user-select: none;
+      -o-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+
+      /* position: absolute; */
+      background: #051127;
+      border: 5px solid #fff;
+      border-radius: 5px;
+      color: #fff;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 30px;
+      padding: 0 8px;
+      cursor: move;
+    }
+  </style>
+</head>
+<link rel="stylesheet" href="src/maptalks.css">
+<script type="text/javascript" src="src/maptalks.js"></script>
+
+<body>
+  <div id="map" class="container"></div>
+</body>
+<script>
+
+  var map = new maptalks.Map('map', {
+    center: [-0.113049, 51.498568],
+    zoom: 14,
+    baseLayer: new maptalks.TileLayer('base', {
+      //urlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      urlTemplate: 'src/images/control/20.jpg',
+      subdomains: ['a', 'b', 'c'],
+      attribution: '&copy; <a href="http://www.osm.org" target="_blank">OpenStreetMap</a> contributors'
+    })
+  });
+
+  const options = {
+    'position': 'none',
+    'content': 'My Control',
+    'class': "parent"
+  };
+  //增加控件
+  class MyControl extends maptalks.control.Control {
+    //初始创建控件UI的方法
+    buildOn(map) {
+      var dom = maptalks.DomUtil.createEl('div', 'my-control');
+      dom.innerText = this.options['content'];
+      //拖拽处理
+      dom.onmousedown = function (ev) {
+        var myControlTag = document.getElementsByClassName("my-control")[0];
+        var myControlTagParent = myControlTag.parentElement;
+        var oEvent = ev || event;
+        var dt = oEvent.clientY - myControlTagParent.offsetTop;
+        var dl = oEvent.clientX - myControlTagParent.offsetLeft;
+
+        document.onmousemove = function (ev) {
+          var oEvent = ev || event;
+          var l = oEvent.clientX - dl;
+          var t = oEvent.clientY - dt;
+          if (l < 0) {
+            l = 0;
+          } else if (l > document.documentElement.clientWidth - myControlTagParent.offsetWidth) {
+            l = document.documentElement.clientWidth - myControlTagParent.offsetWidth;
+          }
+          if (t < 0) {
+            t = 0;
+          } else if (t > document.documentElement.clientHeight - myControlTagParent.offsetHeight) {
+            t = document.documentElement.clientHeight - myControlTagParent.offsetHeight;
+          }
+          myControlTagParent.style.left = l + 'px';
+          myControlTagParent.style.top = t + 'px';
+        };
+        document.onmouseup = function () {
+          document.onmousemove = null;
+          document.onmouseup = null;
+        };
+        //阻止所有默认行为，针对低版本的；
+        // return false; 
+      };
+
+      return dom;
+    }
+    //添加控件的回调
+    onAdd() {
+      // alert("添加")
+    }
+    //删除控件的回调
+    onRemove() {
+      alert("删除")
+    }
+  }
+  MyControl.mergeOptions(options);
+
+  var control = new MyControl({
+    'content': 'Hello!',
+  });
+
+  // console.log(control.__proto__.__proto__.getContainer(), "domdomd")
+
+  //工具条
+  new maptalks.control.Toolbar({
+    'position': 'top-left',
+    'items': [{
+      item: '显示',
+      click: function () {
+        var dom = document.getElementsByClassName("my-control")[0];
+        dom && (dom.style.display = "block");
+      }
+    }, {
+      item: '隐藏',
+      click: function () {
+        var dom = document.getElementsByClassName("my-control")[0];
+        dom && (dom.style.display = "none");
+      }
+    }, {
+      item: '删除',
+      click: function () {
+        //移除控件        
+        map.removeControl(control);
+      }
+    },
+    {
+      item: '添加',
+      click: function () {
+        //添加控件        
+        map.addControl(control);
+      }
+    }, {
+      item: '修改',
+      click: function () { console.log("修改"); }
+    },]
+  })
+    .addTo(map);
+
+</script>
+
+
+</html>

@@ -4,371 +4,127 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>地图 - 显示</title>
 <style type="text/css">
-  html,
-  body {
-    margin: 0px;
-    height: 100%;
-    width: 100%
-  }
+    html,
+    body {
+        margin: 0px;
+        height: 100%;
+        width: 100%
+    }
 
-  .container {
-    width: 100%;
-    height: 100%
-  }
+    .container {
+        width: 100%;
+        height: 100%
+    }
 
-  .my-control {
-    background: #051127;
-    border: 5px solid #fff;
-    border-radius: 5px;
-    color: #fff;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    font-size: 30px;
-    padding: 0 8px
-  }
-  .my-control{
-    width: 50px;
-    height: 200px;
-  }
+    .content {
+        background: rgba(135, 196, 240, 0.8);
+        width: 200px;
+        height: 100px;
+        border: 2px #fff solid;
+        padding: 10px;
+        color: #fff
+    }
+
+    .content input {
+        color: #bbb
+    }
+
+    .content a {
+        color: #fff;
+        float: right;
+        margin-right: 15px
+    }
 </style>
 <link rel="stylesheet" href="src/maptalks.css">
 <script type="text/javascript" src="src/maptalks.js"></script>
 
 <body>
-
-  <div id="map" class="container"></div>
-  <div id="info"></div>
-  <script>
-    //点击map时获取的点
-    var point = [];
-    console.log(maptalks, "maptalks");
-    //创建地图
-    var map = new maptalks.Map('map', {
-      center: [-0.113049, 51.498568],
-      zoom: 14,
-      zoomControl: {
-        'position': 'top-left',
-        'slider': true,
-        'zoomLevel': true
-      },
-      baseLayer: new maptalks.TileLayer('base', {
-        // urlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        urlTemplate: 'src/images/control/20.jpg',
-        subdomains: ['a', 'b', 'c'],
-        attribution: '&copy; <a href="http://www.osm.org" target="_blank">OpenStreetMap</a> contributors'
-      })
-    });
-
-    
-
-    function info(str) {
-      document.getElementById('info').innerHTML = str + ' is clicked';
-    }
-
-    //创建矩形
-    var center = map.getCenter();
-    // Rectangle([x,y],width,height,{矩形属性})
-    var rectangle = new maptalks.Rectangle([-0.10137606604007487, 51.50001062091505], 800, 700, {
-      symbol: {
-        lineColor: '#34495e',
-        lineWidth: 2,
-        polygonFill: '#34495e',
-        polygonOpacity: 0.4
-      }
-    });
-    var rectangle = new maptalks.VectorLayer('rectangle')
-      .addGeometry([rectangle])
-
-    //地图取点： coordinate这种点
-    map.on('click', function (param) {
-      if (point.length > 2 || point.length == 2) {
-        point.pop();
-        point.push(param);
-      } else {
-        point.push(param);
-      }
-      console.log(point, "point")
-    });
-
-    //绘制距离线
-    var distanceTool = new maptalks.DistanceTool({
-      'symbol': {
-        'lineColor': '#34495e',
-        'lineWidth': 2
-      },
-      'vertexSymbol': {
-        'markerType': 'ellipse',
-        'markerFill': '#1bbc9b',
-        'markerLineColor': '#000',
-        'markerLineWidth': 3,
-        'markerWidth': 10,
-        'markerHeight': 10
-      },
-
-      'labelOptions': {
-        'textSymbol': {
-          'textFaceName': 'monospace',
-          'textFill': '#fff',
-          'textLineSpacing': 1,
-          'textHorizontalAlignment': 'right',
-          'textDx': 15,
-          'markerLineColor': '#b4b3b3',
-          'markerFill': '#000'
-        },
-        'boxStyle': {
-          'padding': [6, 2],
-          'symbol': {
-            'markerType': 'square',
-            'markerFill': '#000',
-            'markerFillOpacity': 0.9,
-            'markerLineColor': '#b4b3b3'
-          }
-        }
-      },
-      'clearButtonSymbol': [{
-        'markerType': 'square',
-        'markerFill': '#000',
-        'markerLineColor': '#b4b3b3',
-        'markerLineWidth': 2,
-        'markerWidth': 15,
-        'markerHeight': 15,
-        'markerDx': 20
-      }, {
-        'markerType': 'x',
-        'markerWidth': 10,
-        'markerHeight': 10,
-        'markerLineColor': '#fff',
-        'markerDx': 20
-      }],
-      'language': 'en-US'
-    });
-
-    //测面工具
-    var areaTool = new maptalks.AreaTool({
-        //只能绘制1次
-        'once' : true,
-        'symbol': {
-          'lineColor' : '#1bbc9b',
-          'lineWidth' : 2,
-          'polygonFill' : '#fff',
-          'polygonOpacity' : 0.3
-        },
-        'vertexSymbol' : {
-          'markerType'        : 'ellipse',
-          'markerFill'        : '#34495e',
-          'markerLineColor'   : '#1bbc9b',
-          'markerLineWidth'   : 3,
-          'markerWidth'       : 10,
-          'markerHeight'      : 10
-        },
-        'labelOptions' : {
-          'textSymbol': {
-            'textFaceName': 'monospace',
-            'textFill' : '#fff',
-            'textLineSpacing': 1,
-            'textHorizontalAlignment': 'right',
-            'textDx': 15
-          },
-          'boxStyle' : {
-            'padding' : [6, 2],
-            'symbol' : {
-              'markerType' : 'square',
-              'markerFill' : '#000',
-              'markerFillOpacity' : 0.9,
-              'markerLineColor' : '#b4b3b3'
-            }
-          }
-        },
-        'clearButtonSymbol' :[{
-          'markerType': 'square',
-          'markerFill': '#000',
-          'markerLineColor': '#b4b3b3',
-          'markerLineWidth': 2,
-          'markerWidth': 15,
-          'markerHeight': 15,
-          'markerDx': 22
-        }, {
-          'markerType': 'x',
-          'markerWidth': 10,
-          'markerHeight': 10,
-          'markerLineColor' : '#fff',
-          'markerDx': 22
-        }],
-        language: ''
-      })
-
-    //放大缩小
-    var customPosition = new maptalks.control.Zoom({
-      'position': { 'bottom': '20', 'left': '20' },
-      'slider': false,
-      'zoomLevel': true
-    });
-    map.addControl(customPosition);
-
-    //多边形
-    // maptalks.Polygon([],{}) []:从左到右依次的坐标
-    var polygon = new maptalks.Polygon([
-        [
-          [-0.1365666086426245, 51.50874576201065],
-          [-0.11004492590336667, 51.50874576201065],
-          [-0.11038824865727292, 51.50153340942106],
-          [-0.13201758215336667, 51.50153340942106],
-          [-0.1365666086426245, 51.50874576201065],
-        ]
-      ], {
-        visible : true,
-        editable : true,
-        cursor : 'pointer',
-        shadowBlur : 0,
-        shadowColor : 'black',
-        draggable : false,
-        dragShadow : false, // display a shadow during dragging
-        drawOnAxis : null,  // force dragging stick on a axis, can be: x, y
-        symbol: {
-          'lineColor' : 'red',
-          'lineWidth' : 2,
-          'polygonFill' : 'rgb(135,196,240)',
-          'polygonOpacity' : 0.6
-        }
-      });
-      var polygonVectorLayer = new maptalks.VectorLayer('polygon', polygon);
-      //多边形通过鼠标事件了控制绘制图形
-      polygon.on("mousedown", function(...args){
-        let [data] = args;
-        polygon.startEdit();
-
-      })
-      polygon.on("dblclick", function(...args){
-        polygon.endEdit();
-      })
-
-
-      // 封装的绘制工具 每个层最好加上一个名称方便以后使用
-      var layer = new maptalks.VectorLayer('vectorAllTool').addTo(map);
-      var drawTool = new maptalks.DrawTool({
-       'once' : true,
-        mode: 'Point'
-      }).addTo(map).disable();
-      drawTool.on('drawend', function (param) {
-        console.log(param.geometry);
-        //图形绘制完后，对图层添加几何体。 类似于addTo
-        layer.addGeometry(param.geometry);
-      });
-
-       var items = ['Point', 'LineString', 'Polygon', 'Circle', 'Ellipse', 'Rectangle', 'FreeHandLineString', 'FreeHandPolygon'].map(function (value) {
-        return {
-          item: value,
-          click: function () {
-            drawTool.setMode(value).enable();
-          }
-        };
-      });
-
-
-      // 创建工具条
-    var toolBarLayer = new maptalks.control.Toolbar({
-      'position': 'top-left',
-      'items': [{
-        item: 'menu',
-        click: function () { info('menu'); },
-        children: [{
-          item: 'child 1',
-          click: function () { info('child 1'); }
-        }, {
-          item: 'child 2',
-          click: function () { info('child 2'); }
-        }]
-      }, {
-        item: '距离量算',
-        click: function () {
-          //绘制线距离
-          distanceTool.addTo(map);
-          //启用测量距离 [addTo是启用的,因为用过禁用属性]
-          distanceTool.enable();
-        }
-      }, {
-        item: '面积量算',
-        click: function () { 
-          info('面积量算');
-          areaTool.addTo(map);  
-        }
-      }, {
-        item: '画圆',
-        click: function () { info('画圆'); }
-      }, {
-        item: '矩形',
-        click: function () {
-          info('矩形');
-          //取点，铺点
-          // console.log(point, "矩形")
-          rectangle.addTo(map);
-          //禁用测量距离
-          distanceTool.disable();
-        }
-      },{
-        item: '画多边形',
-        click: function () {
-          //取点，铺点
-          // console.log(point, "画多边形")
-          polygonVectorLayer.addTo(map);
-          drawTool.setMode('Polygon').enable();
-          //禁用测量距离
-          distanceTool.disable();
-        }
-
-      }, {
-            item: 'Shape',
-            children: items
-          },
-          {
-            item: 'Disable',
-            click: function () {
-              drawTool.disable();
-            }
-          },
-          {
-            item: 'Clear',
-            click: function () {
-              layer.clear();
-              polygonVectorLayer.clear();
-            }
-          }
-      ]
-    })
-    toolBarLayer.addTo(map);
-
-    
-    const options = {
-        'position' : 'top-right',
-        'content'  : 'My Control',
-        'testClick':function(){drawTool.setMode('Polygon').enable();}
-      };
-
-      class MyControl extends maptalks.control.Control {
-        //创建ui的dom元素
-        buildOn(map) {
-          var dom = maptalks.DomUtil.createEl('div', 'my-control');
-          // dom.innerText = this.options['content'];
-          dom.innerHTML = "<p style='font-size:16px;'>矩形</p><p onclick='options.testClick()' style='font-size:16px;'>多边形</p>"
-          return dom;
-        }
-        //添加控件的回调
-        onAdd(){}
-        //删除控件的回调
-        onRemove(){}
-      }
-      MyControl.mergeOptions(options);
-      var control = new MyControl({
-        'content'   : 'Hello, MyControl!'
-      });
-      map.addControl(control);
-      // control.addTo(drawTool);
-
-
-
-
-  </script>
+    <div id="map" class="container"></div>
 </body>
+<script>
+    var map = new maptalks.Map('map', {
+        center: [-0.113049, 51.498568],
+        zoom: 14,
+        baseLayer: new maptalks.TileLayer('base', {
+            // urlTemplate: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            urlTemplate: 'src/images/control/20.jpg',
+            subdomains: ['a', 'b', 'c'],
+            attribution: '&copy; <a href="http://www.osm.org" target="_blank">OpenStreetMap</a> contributors'
+        })
+    });
+
+    var customPanel = new maptalks.control.Panel({
+        'position': 'bottom-right',
+        'draggable': true,
+        'custom': true,
+        'closeButton': true,
+        'content': '<div class="content">' +
+            'A custom panel.<br>' +
+            '<input type="text" height=10 value="a text input"/><br>' +
+            '<br><a href="javascript:;" onclick="hide()">close</a>' +
+            '</div>'
+    });
+
+    //隐藏控件
+    function hide() {
+        customPanel.getDOM() && customPanel.hide();
+    }
+    //显示控件
+    function show() {
+        customPanel.getDOM() && customPanel.show();
+    }
+    //增加控件
+    function add() {
+        map.addControl(customPanel);
+    }
+    //删除控件
+    function remove() {
+        // map.removeControl(customPanel);
+        customPanel.remove()
+    }
+    //修改控件
+    function diff() {
+
+    }
+    let customPanelDragging = customPanel.addEventListener("dragging",function(e){
+        console.log(e,"e");
+    })
+    customPanel.removeEventListener("dragging",function(e){
+        customPanelDragging = null;
+    })
+
+    //工具条
+    new maptalks.control.Toolbar({
+        'position': 'top-left',
+        'items': [{
+            item: '显示',
+            click: function () {
+                show()
+            }
+        }, {
+            item: '隐藏',
+            click: function () {
+                hide()
+            }
+        }, {
+            item: '删除',
+            click: function () {
+                //移除控件        
+                remove()
+            }
+        },
+        {
+            item: '添加',
+            click: function () {
+                //添加控件        
+                add();
+            }
+        }, {
+            item: '修改',
+            click: function () { console.log("修改"); }
+        },]
+    })
+        .addTo(map);
+</script>
 
 </html>
