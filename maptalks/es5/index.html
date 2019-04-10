@@ -54,7 +54,7 @@
     });
 
     var customPanel = new maptalks.control.Panel({
-        'position': 'bottom-right',
+        'position': { "right": 426, "top": 0 },
         'draggable': true,
         'custom': true,
         'closeButton': true,
@@ -86,11 +86,46 @@
     function diff() {
 
     }
-    let customPanelDragging = customPanel.addEventListener("dragging",function(e){
-        console.log(e,"e");
-    })
-    customPanel.removeEventListener("dragging",function(e){
-        customPanelDragging = null;
+    //拖拽超出界限处理
+    let customPanelDragging = customPanel.addEventListener("dragging", function (ev) {
+        let width = customPanel.getContainer().offsetWidth;
+        let height = customPanel.getContainer().offsetHeight;
+        //getContainerPoint: 当前容器右上坐标的点{x,y};  getPosition: 当前容器的相对位置{right:,top}
+        let getContainerPoint = customPanel.getContainerPoint();
+        let getPosition = customPanel.getPosition();
+        let containerPosition = document.documentElement.clientWidth - customPanel.getContainerPoint()["x"];
+        //左上
+        if (getContainerPoint["x"] < width) { //224，124
+            customPanel.setPosition({ "right": document.documentElement.clientWidth - width, "top": getPosition["top"] })
+            if (getContainerPoint["y"] < 0) {
+                customPanel.setPosition({ "right": document.documentElement.clientWidth - width, "top": 0 })
+                return;
+            }
+            //右下
+        } else if (getContainerPoint["x"] > document.documentElement.clientWidth) {
+            customPanel.setPosition({ "right": 0, "top": getPosition["top"] })
+            console.log(getContainerPoint["y"], document.documentElement.clientHeight)
+            if (getContainerPoint["y"] > document.documentElement.clientHeight - height) {
+                customPanel.setPosition({ "right": 0, "top": document.documentElement.clientHeight - height })
+                return;
+            }
+        };
+        //右上
+        if (getContainerPoint["y"] < 0) {
+            customPanel.setPosition({ "top": 0, "right": getPosition["right"] })
+            if (getContainerPoint["x"] > document.documentElement.clientWidth) {
+                customPanel.setPosition({ "top": 0, "right": 0 })
+                return;
+            }
+            //左下
+        } else if (getContainerPoint["y"] > document.documentElement.clientHeight - height) {
+            customPanel.setPosition({ "top": document.documentElement.clientHeight - height, "right": getPosition["right"] })
+            if (getContainerPoint["x"] < width) {
+                customPanel.setPosition({ "top": document.documentElement.clientHeight - height, "right": document.documentElement.clientWidth - width })
+                return;
+            }
+        };
+
     })
 
     //工具条
