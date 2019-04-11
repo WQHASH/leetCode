@@ -4,4 +4,6 @@
 // import {moduleName3} from "./moduleList/huohuasiwei/3-huohuasiwei";
 // import {moduleName4} from "./moduleList/huohuasiwei/4-huohuasiwei";
 // import {moduleName5} from "./moduleList/huohuasiwei/5-huohuasiwei";
-import {tempHtml} from "./moduleList/temp";
+import {tempHtml} from "./moduleList/picture-collection";
+
+import * as subscrible from "./moduleList/subscrible-muyiyang/index";
