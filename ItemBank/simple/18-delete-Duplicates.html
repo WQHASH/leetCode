@@ -1,0 +1,31 @@
+<script>
+    /**
+  *   83. 删除排序链表中的重复元素  (需要明白数据结构中链表的概念 :> )
+  *       给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+  *   eg：    输入: 1->1->2
+  *           输出: 1->2
+  *               
+  *           输入: 1->1->2->3->3
+  *           输出: 1->2->3
+  *   思路：
+  *            转成数组然后进行去重，再转成字符串进行拼接 ->
+  */
+    {
+        /**
+         * @param {ListNode} head
+         * @return {ListNode}
+         */
+        var deleteDuplicates = function (head) {
+            let arr = head.split("->");
+            let newArr = Array.from(new Set(arr));
+            let html="";
+            for (let [index, elem] of newArr.entries()) {
+                html += elem +"->";
+            }
+            return html.slice(0, html.length-2);
+        };
+        let head = "1->1->2->3->3";
+        // console.log(deleteDuplicates(head),"head") xxxxxxxxxxxxx并非字符串
+    }
+
+</script>
