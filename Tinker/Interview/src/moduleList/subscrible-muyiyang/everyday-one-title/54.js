@@ -22,7 +22,7 @@ let everydayOneTitle54 = "冒泡排序如何实现，时间复杂度是多少，
         return arr;
     };
     let arr = [22, 34, 2, 3, 5, 6, 89, 21];
-    console.log(bubble(arr));
+    // console.log(bubble(arr));
     /***
      * 看起来没问题，不过一般生产环境都不用这个，原因是效率低下，
      * 因为就算你给一个已经排好序的数组，如[1,2,3,4,5,6] 它也会走一遍流程，白白浪费资源。
@@ -56,7 +56,7 @@ let everydayOneTitle54 = "冒泡排序如何实现，时间复杂度是多少，
         return arr;
     };
     let arr = [22, 34, 2, 3, 5, 6, 89, 21];
-    console.log(bubble(arr));
+    // console.log(bubble(arr));
 }
 
 export { everydayOneTitle54 }
