@@ -4,8 +4,8 @@ let everydayOneTitle53 = "输出以下代码的执行结果并解释为什么";
     var b = a;
     a.x = a = {n: 2};
     
-    console.log(a.x) 	// --> undefined
-    console.log(b.x)    // --> {n: 2}
+    // console.log(a.x) 	// --> undefined
+    // console.log(b.x)    // --> {n: 2}
 
     /***
      *  1. 优先级问题。 .的优先级高于=，所以先执行a.x, 这时内存中就存在a.x=undefined; 
