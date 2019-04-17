@@ -1,9 +1,9 @@
 let everydayOneTitle53 = "输出以下代码的执行结果并解释为什么";
 {
-    var a = {n: 1};
+    var a = { n: 1 };
     var b = a;
-    a.x = a = {n: 2};
-    
+    a.x = a = { n: 2 };
+
     // console.log(a.x) 	// --> undefined
     // console.log(b.x)    // --> {n: 2}
 
@@ -18,4 +18,4 @@ let everydayOneTitle53 = "输出以下代码的执行结果并解释为什么";
      */
 }
 
-export {everydayOneTitle53}
+export { everydayOneTitle53 }

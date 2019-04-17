@@ -75,7 +75,7 @@ let everydayOneTitle56 = "要求设计 LazyMan 类";
     function LazyMan() {
         return new Lazy("Tony");
     }
-    LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('junk food');
+    // LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('junk food');
 
 
 }

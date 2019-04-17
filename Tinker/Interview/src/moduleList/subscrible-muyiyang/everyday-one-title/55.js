@@ -12,14 +12,14 @@ let everydayOneTitle55 = "类似对象转数组的问题";
         for (let i = 0; i < 12; i++) {
             arr.push(null)
             for (let key in obj) {
-                if(key == (i+1)){
+                if (key == (i + 1)) {
                     arr.splice(i, 1, obj[key])
                 }
             }
         }
         return arr;
     };
-    let obj = {1:222, 2:123, 5:888};
+    let obj = { 1: 222, 2: 123, 5: 888 };
     // console.log(arrToObject(obj));
 
 }
@@ -28,9 +28,9 @@ let everydayOneTitle55 = "类似对象转数组的问题";
  * 利用es6 Array.from({},()=>{}) 对象转数组的特性来处理
  */
 {
-    let obj = {1:222, 2:123, 5:888};
-    let arr = Array.from({length:12},(item,index)=>{
-        return obj[index+1]||null;
+    let obj = { 1: 222, 2: 123, 5: 888 };
+    let arr = Array.from({ length: 12 }, (item, index) => {
+        return obj[index + 1] || null;
     });
     // console.log(arr,"arr")
 }

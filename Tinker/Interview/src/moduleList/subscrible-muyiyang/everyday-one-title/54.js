@@ -9,15 +9,17 @@ let everydayOneTitle54 = "冒泡排序如何实现，时间复杂度是多少，
             //         arr[j + 1] = temp;
             //     }
             // }
-
+            //********这两种排序的不同在于 内外层比较 还是 内层自身比较 (共同点是排过序的不再排)******** */
             for (let j = i + 1; j < arr.length; j++) {
                 if (arr[i] > arr[j]) {  //小到大
-                    let temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
+                    // let temp = arr[i];
+                    // arr[i] = arr[j];
+                    // arr[j] = temp;
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
                 }
 
             }
+
         }
         return arr;
     };
@@ -55,8 +57,9 @@ let everydayOneTitle54 = "冒泡排序如何实现，时间复杂度是多少，
         }
         return arr;
     };
-    let arr = [22, 34, 2, 3, 5, 6, 89, 21];
-    // console.log(bubble(arr));
+    // let arr = [22, 34, 2, 3, 5, 6, 89, 21];
+    let arr = [2, 3, 4, 6, 5] //该方法并不是改版后的排序，存在问题
+    console.log(bubble(arr));
 }
 
 export { everydayOneTitle54 }
