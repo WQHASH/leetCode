@@ -1,0 +1,52 @@
+<script>
+    /**
+    *   101. 对称二叉树
+    *       给定一个二叉树，检查它是否是镜像对称的。
+    *       
+    *       思路：
+    *           判断二叉树左右是否相等，需要满足：
+    *
+    **/
+
+
+    /**
+    * Definition for a binary tree node.
+    * function TreeNode(val) {
+    *     this.val = val;
+    *     this.left = this.right = null;
+    * }
+    */
+
+    var isSymmetric = function (root) {
+        if (root.left == null && root.right == null) {
+            return true;
+        } else if ((root.left != null && root.right == null) || (root.left == null && root.right != null) || (root.left.val != root.right.val)) {
+            return false
+        }
+        return isSymmetric(root.left) && isSymmetric(root.right);
+    };
+
+    var node1 = {
+        val: 1,
+        left: {
+            val: 2,
+            left: {
+                val: 3,
+                left: null,
+                right: null
+            },
+            right: null,
+        },
+        right: {
+            val: 2,
+            left: null,
+            right: {
+                val: 3,
+                left: null,
+                right: null
+            }
+        }
+    }
+
+    console.log(isSymmetric(node1))
+</script>

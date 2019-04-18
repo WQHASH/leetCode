@@ -1,0 +1,107 @@
+<script>
+    /**
+    *   100. 相同的树
+    *       给定两个二叉树，编写一个函数来检验它们是否相同。
+    *       如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。  
+    *       
+    *       思路：
+    *           判断两个二叉树是否相等，需要满足：
+    *               1. val根相等;
+    *               2. 每颗树的左子树和另一棵树的左子树相等； (可能会通过递归进行生层次的查询判断)
+    *               3. 每棵树的右子树和另外一棵树的右子树相等；
+    **/
+
+    {
+        //创建二叉树
+        function BinarySearchTree() {
+            var Node = function (key) {
+                this.key = key;
+                this.left = null;
+                this.right = null;
+            };
+            var root = null;
+
+            this.insert = function (key) {
+                var newNode = new Node(key);
+                if (root === null) {
+                    root = newNode;
+                } else {
+                    this.insertNode(root, newNode);
+                }
+                console.log(root)
+            }
+
+            this.insertNode = function (node, newNode) {
+                if (newNode.key < node.key) {
+                    if (node.left === null) {
+                        node.left = newNode;
+                    } else {
+                        this.insertNode(node.left, newNode)
+                    }
+                } else {
+                    if (node.right === null) {
+                        node.right = newNode;
+                    } else {
+                        this.insertNode(node.right, newNode);
+                    }
+                }
+            }
+
+        };
+
+        var tree = new BinarySearchTree();
+        // tree.insert(1);
+        // tree.insert(2);
+        // tree.insert(2);
+
+
+        /**
+        * Definition for a binary tree node.
+        * function TreeNode(val) {
+        *     this.val = val;
+        *     this.left = this.right = null;
+        * }
+        */
+        var isSameTree = function (p, q) {
+            var diff = function (node1, node2) {
+                if (node1 == null && node2 == null) {
+                    return true;
+                } else if ((node1 == null && node2 != null) || (node1 != null && node2 == null) || (node1.val != node2.val)) {
+                    return false;
+                }
+                return diff(node1.left, node2.left) && diff(node1.right, node2.right);
+            }
+            return diff(p, q);
+        };
+
+        var node1 = {
+            val: 1,
+            left: null,
+            right: {
+                val: 2,
+                left: null,
+                right: {
+                    val: 3,
+                    left: null,
+                    right: null
+                }
+            }
+        }
+        var node2 = {
+            val: 1,
+            left: null,
+            right: {
+                val: 2,
+                left: null,
+                right: {
+                    val: 3,
+                    left: null,
+                    right: null
+                }
+            }
+        }
+        // console.log(isSameTree(node1, node2), "11")
+    }
+
+
+</script>
