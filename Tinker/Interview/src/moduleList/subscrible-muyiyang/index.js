@@ -7,4 +7,5 @@ import { everydayOneTitle54 } from "./everyday-one-title/54"
 import { everydayOneTitle55 } from "./everyday-one-title/55"
 import { everydayOneTitle56 } from "./everyday-one-title/56"
 import { everydayOneTitle57 } from "./everyday-one-title/57"
+import { everydayOneTitle58 } from "./everyday-one-title/58"
 export { assign }

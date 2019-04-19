@@ -59,7 +59,7 @@ let everydayOneTitle54 = "冒泡排序如何实现，时间复杂度是多少，
     };
     // let arr = [22, 34, 2, 3, 5, 6, 89, 21];
     let arr = [2, 3, 4, 6, 5] //该方法并不是改版后的排序，存在问题
-    console.log(bubble(arr));
+    // console.log(bubble(arr));
 }
 
 export { everydayOneTitle54 }
