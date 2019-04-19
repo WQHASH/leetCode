@@ -19,21 +19,22 @@
 
     var isSymmetric = function (root) {
         if (root == null) {
-            return;
+            return true;
         }
-    
-        
+
+        var sameTree = function (lfTree, rtTree) {
             if (lfTree == null && rtTree == null) {
                 return true;
             }
             if (lfTree != null && rtTree != null && lfTree.val == rtTree.val) {
                 return sameTree(lfTree.left, rtTree.right) && sameTree(lfTree.right, rtTree.left);
-            }else{
+            } else {
                 return false;
             }
-        };
+        }
         return sameTree(root.left, root.right);
     };
+
 
     var node1 = {
         val: 1,
@@ -57,5 +58,5 @@
         }
     }
 
-    console.log(isSymmetric(node1))
+    console.log(isSymmetric([]))
 </script>
