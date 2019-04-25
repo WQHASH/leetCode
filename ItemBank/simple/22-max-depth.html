@@ -1,0 +1,103 @@
+<script>
+    /**
+      *   104. 二叉树的最大深度
+      *       给定一个二叉树，找出其最大深度。
+      *         二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+      *         说明: 叶子节点是指没有子节点的节点。
+      * 
+      *       思路：当前结点深度等于左右子树中较大的那个深度加一。
+      *       理解： ****** 我采用的是，在递归过程中加一，便于理解：******
+      *              二叉树递归时会到达最底层，这时上边的每一层都会有个加一的状态，
+      *              最底层的会先执行加一，然后返回一个深度给上一层，让上一层在加一，
+      *           
+      **/
+
+    /**
+     * Definition for a binary tree node.
+     * function TreeNode(val) {
+     *     this.val = val;
+     *     this.left = this.right = null;
+     * }
+     */
+
+    {
+        var maxDepth = function (root) {
+            if (root == null) { return 0 };
+            // const depth = Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
+            return Math.max(maxDepth(root.left) + 1, maxDepth(root.right) + 1);
+        };
+        var node1 = {
+            val: 1,
+            left: {
+                val: 2,
+                left: {
+                    val: 3,
+                    left: {
+                        val: 4,
+                        left: null,
+                        right: null,
+                    },
+                    right: null
+                },
+                right: null,
+            },
+            right: {
+                val: 2,
+                left: null,
+                right: {
+                    val: 3,
+                    left: null,
+                    right: null
+                }
+            }
+        }
+
+        // console.log(maxDepth(node1), "maxDepth")
+    }
+
+
+    {
+        var maxDepth = function (root) {
+            var maxn = -1;
+            function dfs(root, depth) {
+                if (!root) {
+                    maxn = Math.max(maxn, depth);
+                    return;
+                }
+                dfs(root.left, depth + 1);
+                dfs(root.right, depth + 1);
+            };
+            dfs(root, 0);
+            return maxn;
+        };
+
+        var node1 = {
+            val: 1,
+            left: {
+                val: 2,
+                left: {
+                    val: 3,
+                    left: {
+                        val: 4,
+                        left: null,
+                        right: null,
+                    },
+                    right: null
+                },
+                right: null,
+            },
+            right: {
+                val: 2,
+                left: null,
+                right: {
+                    val: 3,
+                    left: null,
+                    right: null
+                }
+            }
+        }
+
+        // console.log(maxDepth(node1), "maxDepth")
+
+    }
+</script>
