@@ -2,6 +2,8 @@
 import { assign } from "./advanced/4-2-Object.assign"
 
 //每日一题
+import { everydayOneTitle46 } from "./everyday-one-title/46"
+import { everydayOneTitle47 } from "./everyday-one-title/47"
 import { everydayOneTitle50 } from "./everyday-one-title/50"
 import { everydayOneTitle52 } from "./everyday-one-title/52"
 import { everydayOneTitle51 } from "./everyday-one-title/51"

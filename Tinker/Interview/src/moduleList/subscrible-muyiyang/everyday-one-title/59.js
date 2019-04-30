@@ -70,7 +70,7 @@ let everydayOneTitle59 = "58: 给定两个数组，写一个方法来计算它�
 
     let nums1 = [1, 1];
     let nums2 = [1];
-    console.log(arrIntersection(nums1, nums2));
+    // console.log(arrIntersection(nums1, nums2));
 }
 
 export { everydayOneTitle59 }
