@@ -40,7 +40,7 @@ let everydayOneTitle82 = "第 82 题：算法题「移动零」，给定一个�
         return arr;
     };
     let arr = [0, 1, 0, 3, 12];
-    console.log(moveNum(arr));
+    // console.log(moveNum(arr));
 }
 
 export {
