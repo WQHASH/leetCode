@@ -1,5 +1,3 @@
-import { type } from "os";
-
 let everydayOneTitle84 = "第 84 题：请实现一个 add 函数，满足以下功能";
 
 {
