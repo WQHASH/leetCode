@@ -41,17 +41,21 @@ let everydayOneTitle86 = "第 86 题：周一算法题之「两数之和」";
         let map = {};
         for (let i = 0; i < nums.length; i++) {
             let n = nums[i];
-            if ((target - n) in nums) {
+            if ((target - n) in map) {
                 return [i, map[target - n]];
             } else {
                 map[n] = i;
             }
         }
     }
-    let nums = [2, 11, 7, 15], target = 9;
+    let nums = [2, 11, 1, 15], target = 3;
     // console.log(twoSum(nums, target));
 }
-
+{
+    var obj = {};
+    obj["2"] = 1;
+    var num = 2;
+}
 export {
     everydayOneTitle86
 }
