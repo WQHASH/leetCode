@@ -1,35 +1,39 @@
-let everydayOneTitle84 = "第 84 题：请实现一个 add 函数，满足以下功能 ";
+let everydayOneTitle84 = "第 84 题：请实现一个 add 函数，满足以下功能";
 
 {
     /****
-     * 第 84 题：请实现一个 add 函数
+     * 第 81 题：请实现一个 add 函数，满足以下功能
      *          add(1); 	    // 1
      *          add(1)(2);  	// 3
      *          add(1)(2)(3)；  // 6
+     * 
      *          add(1)(2, 3);   // 6
      *          add(1, 2)(3);   // 6
      *          add(1, 2, 3);   // 6
+     * 
      */
 
 
-    function add() {
-        let args = [].slice.call(arguments);
-        let fn = function () {
-            let fn_args = [].slice.call(arguments)
-            return add.apply(null, args.concat(fn_args))
-        }
-        // 因为 toString方法会自动执行; 比如在 alert({}) 是个对象是其实也调用了toString 
-        fn.toString = function () {
-            return args.reduce((a, b) => a + b)
-        }
-        return fn
-    }
-
-    let addSum = add(1, 2);
-    console.log(addSum);
-
 }
-
+{
+    function add(...a) {
+        let sum = a.reduce((p, n) => p + n);
+        function next(...b) {
+            let _sum = b.reduce((p, n) => p + n);
+            sum = sum + _sum;
+            return next;
+        }
+        //Function.toString该方法在需要转换为字符串时，通常会自动调用函数的 toString 方法。
+        next.toString = function () {
+            return sum;
+        };
+        return next;
+    }
+    // let fun = add(1, 2)(3);
+    add(1, 2);
+    // console.log(add(1, 2),"add");
+    // console.log(fun)
+}
 
 export {
     everydayOneTitle84
