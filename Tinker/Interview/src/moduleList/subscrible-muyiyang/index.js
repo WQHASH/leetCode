@@ -23,4 +23,5 @@ import { everydayOneTitle69 } from "./everyday-one-title/69"
 import { everydayOneTitle76 } from "./everyday-one-title/76"
 import { everydayOneTitle81 } from "./everyday-one-title/81"
 import { everydayOneTitle82 } from "./everyday-one-title/82"
+import { everydayOneTitle84 } from "./everyday-one-title/84"
 export { assign }
