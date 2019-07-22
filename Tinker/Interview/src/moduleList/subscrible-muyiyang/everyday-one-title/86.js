@@ -44,6 +44,7 @@ let everydayOneTitle86 = "第 86 题：周一算法题之「两数之和」";
             if ((target - n) in map) {
                 return [i, map[target - n]];
             } else {
+                //注意这里将所有的数组值作为map的键名,下标作为值 [因结果取的就是下标]，以供上面使用 
                 map[n] = i;
             }
         }
