@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: wangqi
+ * @Date: 2019-09-30 16:01:14
+ * @LastEditTime: 2019-09-30 17:06:15
+ */
+
 //advanced 进阶
 import { assign } from "./advanced/4-2-Object.assign"
 
@@ -21,6 +28,8 @@ import { everydayOneTitle64 } from "./everyday-one-title/64"
 import { everydayOneTitle67 } from "./everyday-one-title/67"
 import { everydayOneTitle69 } from "./everyday-one-title/69"
 import { everydayOneTitle76 } from "./everyday-one-title/76"
+import { everydayOneTitle78 } from "./everyday-one-title/78"
+import { everydayOneTitle79 } from "./everyday-one-title/79"
 import { everydayOneTitle81 } from "./everyday-one-title/81"
 import { everydayOneTitle82 } from "./everyday-one-title/82"
 import { everydayOneTitle84 } from "./everyday-one-title/84"
