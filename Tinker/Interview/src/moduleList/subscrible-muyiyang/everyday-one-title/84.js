@@ -23,7 +23,8 @@ let everydayOneTitle84 = "第 84 题：请实现一个 add 函数，满足以下
             sum = sum + _sum;
             return next;
         }
-        //Function.toString该方法在需要转换为字符串时，通常会自动调用函数的 toString 方法。
+        // （引用类型转字符时串默认会调用 toString 方法），
+        // 所以Function.toString该方法在需要转换为字符串时, 通常会自动调用函数的 toString 方法。
         next.toString = function () {
             return sum;
         };
