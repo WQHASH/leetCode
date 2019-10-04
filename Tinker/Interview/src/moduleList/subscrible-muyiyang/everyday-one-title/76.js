@@ -1,4 +1,12 @@
-let everydayOneTitle76 = "76: 输出以下代码运行结果"; {
+/*
+ * @Description: 
+ * @Author: wangqi
+ * @Date: 2019-09-30 16:01:14
+ * @LastEditTime: 2019-10-04 10:56:25
+ */
+
+let everydayOneTitle76 = "76: 输出以下代码运行结果";
+{
     /***
      * // example 1
          var a={}, b='123', c=123;
