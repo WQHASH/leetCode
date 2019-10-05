@@ -2,7 +2,7 @@
  * @Description: Promise.all实现
  * @Author: wangqi
  * @Date: 2019-09-30 16:01:14
- * @LastEditTime: 2019-10-04 11:58:31
+ * @LastEditTime: 2019-10-05 11:14:45
  */
 
 
@@ -45,9 +45,9 @@ let everydayOneTitle80 = "第 80 题：介绍下 Promise.all 使用、原理实�
     
     let newP = Promise.myAll([p1, p2, p4]);
     newP.then((data) => {
-        console.log(data, "data")
+        // console.log(data, "data")
     }).catch((err) => {
-        console.log(err, "err")
+        // console.log(err, "err")
     })
 }
 

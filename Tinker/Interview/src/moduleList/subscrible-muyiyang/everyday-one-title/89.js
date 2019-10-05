@@ -2,11 +2,11 @@
  * @Description: Promise.all实现
  * @Author: wangqi
  * @Date: 2019-09-30 16:01:14
- * @LastEditTime: 2019-10-04 12:07:49
+ * @LastEditTime: 2019-10-05 11:07:20
  */
 
 
-let everydayOneTitle80 = "第 89 题：设计并实现 Promise.race()";
+let everydayOneTitle89 = "第 89 题：设计并实现 Promise.race()";
 
 {
     /****
@@ -29,5 +29,5 @@ let everydayOneTitle80 = "第 89 题：设计并实现 Promise.race()";
 }
 
 export {
-    everydayOneTitle80
+    everydayOneTitle89
 }
