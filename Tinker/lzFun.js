@@ -132,7 +132,7 @@
 		var result;
 		if(isType=="Object"){
 			result={};
-			for(key in obj){
+			for(var key in obj){
 				if(isClass(key)){}
 				result[key]= clone(obj[key]);
 			}	
