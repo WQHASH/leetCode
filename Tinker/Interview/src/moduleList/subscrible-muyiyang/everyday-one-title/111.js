@@ -2,7 +2,7 @@
  * @Description: 编程题，写个程序把 entry 转换成如下对象
  * @Author: wangqi
  * @Date: 2019-10-08 21:36:36
- * @LastEditTime: 2019-10-24 21:52:14
+ * @LastEditTime: 2019-10-26 10:50:37
  */
 
 let everydayOneTitle111 = "第 111 题: 编程题，写个程序把 entry 转换成如下对象";
@@ -10,7 +10,7 @@ let everydayOneTitle111 = "第 111 题: 编程题，写个程序把 entry 转换
 {
     /****
      *   编程题，写个程序把 entry 转换成如下对象
-     *     
+     *     思路: 这里的重点在于对keyName的拼接，其实每次的result都是一个新对象不过这不是重点 [它只是个容器]
      *          
      */
 
@@ -37,9 +37,7 @@ let everydayOneTitle111 = "第 111 题: 编程题，写个程序把 entry 转换
 
 
 
-    function parseObj(entry) {
 
-    };
 
     var entry = {
         a: {
@@ -52,10 +50,25 @@ let everydayOneTitle111 = "第 111 题: 编程题，写个程序把 entry 转换
                 xx: 'adxx'
             },
             e: 'ae'
-        }
+        },
     }
 
-    // console.log(parseObj(entry))
+    function parseObj(obj, parentKey = '', result = {}) {
+        for (const key in obj) { 
+            if(obj.hasOwnProperty(key)) {
+                let keyName = `${parentKey}${key}`;
+                if(typeof obj[key] === 'object') {
+                    parseObj(obj[key], keyName+".", result)
+                }else{
+                    result[keyName] = obj[key];
+                }
+            }
+        }
+        return result;
+
+    };
+
+    console.log(parseObj(entry))
 
 }
 
