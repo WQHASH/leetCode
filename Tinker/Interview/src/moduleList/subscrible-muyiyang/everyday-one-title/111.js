@@ -2,7 +2,7 @@
  * @Description: 编程题，写个程序把 entry 转换成如下对象
  * @Author: wangqi
  * @Date: 2019-10-08 21:36:36
- * @LastEditTime: 2019-10-26 10:50:37
+ * @LastEditTime: 2019-10-31 21:53:44
  */
 
 let everydayOneTitle111 = "第 111 题: 编程题，写个程序把 entry 转换成如下对象";
@@ -68,7 +68,7 @@ let everydayOneTitle111 = "第 111 题: 编程题，写个程序把 entry 转换
 
     };
 
-    console.log(parseObj(entry))
+    // console.log(parseObj(entry))
 
 }
 
