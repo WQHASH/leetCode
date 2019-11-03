@@ -2,7 +2,7 @@
  * @Description: 编程题，写个程序把 entry 转换成如下对象（跟昨日题目相反）
  * @Author: wangqi
  * @Date: 2019-10-08 21:36:36
- * @LastEditTime: 2019-10-29 21:31:57
+ * @LastEditTime: 2019-11-03 09:22:48
  */
 
 let everydayOneTitle112 = "第 112 题: 编程题，写个程序把 entry 转换成如下对象（跟昨日题目相反）";
@@ -71,7 +71,7 @@ let everydayOneTitle112 = "第 112 题: 编程题，写个程序把 entry 转换
         }
     }
 
-    console.log(nested(entry))
+    // console.log(nested(entry))
 
 }
 

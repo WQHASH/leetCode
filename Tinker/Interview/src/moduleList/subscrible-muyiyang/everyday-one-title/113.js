@@ -36,7 +36,7 @@ let everydayOneTitle113 = "第 113 题: 编程题，根据以下要求，写一�
 
     let arr0 = [123, "meili", "123", "mogu", 123];
     let arr1 = [123, [1, 2, 3], [1, "2", 3], [1, 2, 3], "meili"];
-    console.log(arrRemoval(arr1))
+    // console.log(arrRemoval(arr1))
 
 
 

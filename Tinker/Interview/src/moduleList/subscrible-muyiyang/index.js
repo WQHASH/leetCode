@@ -3,7 +3,7 @@
  * @Author: wangqi
  * @Date: 2019-09-30 16:01:14
 <<<<<<< HEAD
- * @LastEditTime: 2019-10-31 22:27:09
+ * @LastEditTime: 2019-11-03 09:11:23
 =======
  * @LastEditTime: 2019-10-29 21:05:06
 >>>>>>> eae96307166e46dec4c31bd92bf7d6056add5694
@@ -55,4 +55,5 @@ import { everydayOneTitle110 } from "./everyday-one-title/110"
 import { everydayOneTitle111 } from "./everyday-one-title/111"
 import { everydayOneTitle112 } from "./everyday-one-title/112"
 import { everydayOneTitle113 } from "./everyday-one-title/113"
+import { everydayOneTitle114 } from "./everyday-one-title/114"
 export { assign }
