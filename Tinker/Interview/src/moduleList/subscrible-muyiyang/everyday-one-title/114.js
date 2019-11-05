@@ -41,10 +41,9 @@ let everydayOneTitle114 = "第 114 题: 编程题，找出字符串中连续出�
     }
 
     let str = 'abcaakjbb';
-    console.log(serachStr(str), "serachStr")
+    // console.log(serachStr(str), "serachStr")
 
-
-
+    
 }
 
 export {
