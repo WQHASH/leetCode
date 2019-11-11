@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: wangqi
  * @Date: 2019-09-30 16:01:14
- * @LastEditTime: 2019-11-10 11:07:42
+ * @LastEditTime: 2019-11-11 11:29:24
  */
 
 //advanced 进阶
@@ -56,4 +56,6 @@ import { everydayOneTitle116 } from "./everyday-one-title/116"
 import { everydayOneTitle121 } from "./everyday-one-title/121"
 import { everydayOneTitle129 } from "./everyday-one-title/129"
 import { everydayOneTitle133 } from "./everyday-one-title/133"
+import { everydayOneTitle134 } from "./everyday-one-title/134"
+import { everydayOneTitle135 } from "./everyday-one-title/135"
 export { assign }
