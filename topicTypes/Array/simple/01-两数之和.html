@@ -2,7 +2,7 @@
  * @Description: 01-两数之和
  * @Author: wangqi
  * @Date: 2019-11-28 20:50:17
- * @LastEditTime: 2019-11-28 22:20:06
+ * @LastEditTime: 2019-11-29 21:15:32
  -->
 <script>
     // 给定一个整数数组 nums 和一个目标值 target， 请你在该数组中找出和为目标值的那 两个 整数， 并返回他们的数组下标。
@@ -58,6 +58,33 @@
                     return [obj[dif], i]
                 }
                 obj[nums[i]] = i;
+            }
+        };
+        var nums = [7, 11, 15, 2],
+            target = 9;
+
+        var arr = twoSum(nums, target);
+        // console.log(arr, "arr");
+
+
+    })();
+
+    // -----------------------------
+
+    (function () {
+        /**
+         * @description: 利用indexOf来处理
+         * @param {type} 
+         * @return: 
+         */
+        var twoSum = function (nums, target) {
+            for (var i = 0; i < nums.length; i++) {
+                var dif = target - nums[i];
+                var index = nums.lastIndexOf(dif);
+                if (index != -1 && index != i) {
+                    return [index, i]
+                }
+
             }
         };
         var nums = [7, 11, 15, 2],
