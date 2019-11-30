@@ -1,0 +1,65 @@
+<!--
+ * @Description: 27-移除元素
+ * @Author: wangqi
+ * @Date: 2019-11-30 12:32:45
+ * @LastEditTime: 2019-11-30 12:55:19
+ -->
+<script>
+    // 给定一个数组 nums 和一个值 val，你需要原地移除所有数值等于 val 的元素，返回移除后数组的新长度。
+
+    // 不要使用额外的数组空间，你必须在原地修改输入数组并在使用 O(1) 额外空间的条件下完成。
+
+    // 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
+
+
+    (function () {
+        /**
+         * @description: 暴力破解法
+         * @param {number[]} nums
+         * @param {number} val
+         * @return {number}
+         */
+        var removeElement = function (nums, val) {
+            for (var i = 0; i < nums.length; i++) {
+                if (val == nums[i]) {
+                    // 这样的效率会高些
+                    nums.splice(i--, 1);
+                    // i--
+                }
+            }
+            return nums.length;
+        };
+
+        var nums = [3, 2, 2, 3],
+            val = 3;
+        // console.log(removeElement(nums, val));
+    })();
+
+    // -----------------------------
+
+    (function () {
+        /**
+         * @description: 
+         * @param {number[]} nums
+         * @param {number} val
+         * @return {number}
+         */
+        var removeElement = function (nums, val) {
+            var index = 0;
+            for (var i = nums.length; i--;) {
+                if (nums[i] != val) {
+                    index++;
+                } else {
+                    nums.splice(i, 1);
+                }
+            }
+            return nums.length;
+        };
+
+        var nums = [3, 2, 2, 3],
+            val = 3;
+        console.log(removeElement(nums, val));
+    })();
+
+    // -----------------------------
+</script>
