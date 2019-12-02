@@ -1,0 +1,32 @@
+<!--
+ * @Description: 53-最大子序和
+ * @Author: wangqi
+ * @Date: 2019-12-02 20:25:51
+ * @LastEditTime: 2019-12-02 21:00:24
+ -->
+<script>
+    // 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+    // 输入: [-2,1,-3,4,-1,2,1,-5,4],
+    // 输出: 6
+    // 解释: 连续子数组 [4,-1,2,1] 的和最大，为 6
+
+    var maxSubArray = function (nums) {
+        var maxn = -Number.MAX_VALUE;
+        var sum = 0;
+        nums.forEach((item, index, list) => {
+            sum += item;
+            // maxn相当于会存储之前最大的和, 如果当前+=完变小，取得还是之前最max的值
+            if (sum > maxn) {
+                maxn = sum;
+            }
+
+            if (sum < 0) {
+                sum = 0;
+            }
+        });
+        return maxn;
+    };
+    var nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+    console.log(maxSubArray(nums));
+</script>
