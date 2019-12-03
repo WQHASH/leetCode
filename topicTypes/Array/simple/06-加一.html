@@ -1,0 +1,47 @@
+<!--
+ * @Description: 66-加一
+ * @Author: wangqi
+ * @Date: 2019-12-03 22:23:21
+ * @LastEditTime: 2019-12-03 22:49:29
+ -->
+
+
+<script>
+    // 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。
+
+    // 最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。
+
+    // 你可以假设除了整数 0 之外，这个整数不会以零开头。
+
+    //  输入: [1,2,3]     输出: [1,2,4]         解释: 输入数组表示数字 123。             
+    //  输入: [4,3,2,1]   输出: [4,3,2,2]       解释: 输入数组表示数字 4321。
+    //              
+
+    // 理解：直白一点就是末尾数加1，满十向前一位进一，如果最高位满十，在首位插一位1
+
+    /**
+     * @description: 利用取余的思路解决
+     * @param {type} 
+     * @return: 
+     */
+    var plusOne = function (digits) {
+        for (var i = digits.length - 1; i >= 0; i--) {
+            let num = digits[i] + 1;
+            if (digits[i] < 10) {
+                digits[i] = num;
+                return digits;
+            } else {
+                //说明从左到右数的位数要满十
+                digits[i] = num % 10;
+            }
+        }
+
+        // 准备手动进位操作
+        digits.unshift(1);
+        return digits;
+
+    };
+
+    var digits = [1, 2, 3];
+    console.log(plusOne(digits));
+</script>
