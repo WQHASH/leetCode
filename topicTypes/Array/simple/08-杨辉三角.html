@@ -1,0 +1,37 @@
+<!--
+ * @Description: 118-杨辉三角
+ * @Author: wangqi
+ * @Date: 2019-12-05 20:53:21
+ * @LastEditTime: 2019-12-05 21:51:04
+ -->
+<script>
+    // 给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。
+
+    (function () {
+
+        /**
+         * @description: 
+         * @param {type} 
+         * @return: 
+         */
+        var generate = function (numRows) {
+            var arr = [];
+            for (var i = 1; i <= numRows; i++) {
+                var row = [];
+                // 这里的 i 代表了row的长度
+                for (var j = 0; j < i; j++) {
+                    if (j == 0 || j == i - 1) {
+                        row.push(1)
+                    } else {
+                        // 这里 i-2 是因为最初用的为 i=1 (也只当i>=3才会进到这里)
+                        row.push(arr[i - 2][j - 1] + arr[i - 2][j]);
+                    }
+                }
+                arr.push(row)
+            }
+            return arr;
+        };
+
+        console.log(generate(5));
+    })();
+</script>
