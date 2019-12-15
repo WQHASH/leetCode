@@ -1,0 +1,67 @@
+<!--
+ * @Description: 169. 多数元素
+ * @Author: wangqi
+ * @Date: 2019-12-15 09:13:56
+ * @LastEditTime: 2019-12-15 10:01:01
+ -->
+<script>
+    // 给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。
+
+    // 你可以假设数组是非空的，并且给定的数组总是存在多数元素。
+
+    // As:  输入: [3,2,3]               输出: 3
+    //      输入: [2,2,1,1,1,2,2]       输出: 2
+
+
+
+    (function () {
+
+        /**
+         * @description: 暴力求解法
+         * @param {type} 
+         * @return: 
+         */
+        var majorityElement = function (nums) {
+            var length = nums.length,
+                half = Math.ceil(length / 2),
+                obj = {};
+            for (let [key, value] of nums.entries()) {
+                if (obj[value]) {
+                    obj[value] = obj[value] + 1;
+                } else {
+                    obj[value] = 1;
+                }
+            }
+            for (let [key, value] of Object.entries(obj)) {
+                if (value >= half) {
+                    return key
+                }
+            }
+
+        };
+        var arr = [2, 2, 1, 1, 1, 2, 2];
+        // console.log(majorityElement(arr))
+
+    })();
+
+    (function () {
+
+        /**
+         * @description: 利用排序，处于中间的一定是众数
+         * @param {type} 
+         * @return: 
+         */
+        var majorityElement = function (nums) {
+            var isEven = nums.length % 2;
+            nums = nums.sort(function (left, right) {
+                return left - right
+            });
+            // 题意是说一定会存在众数 (如果长度为偶数,可能会存在两个相同的众数，这里只是为通过测试)
+            return isEven == 0 ? nums[nums.length / 2 - 1] : nums[Math.floor(nums.length / 2)];
+
+        };
+        var arr = [1, 1, 1, 1, 2, 2, 2, 2];
+        console.log(majorityElement(arr))
+
+    })();
+</script>
