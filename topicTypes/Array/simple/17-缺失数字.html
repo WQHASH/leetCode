@@ -1,0 +1,65 @@
+<!--
+ * @Description: 268. 缺失数字
+ * @Author: wangqi
+ * @Date: 2019-12-21 10:42:50
+ * @LastEditTime : 2019-12-21 11:32:29
+ -->
+<script>
+    // 给定一个包含 0, 1, 2, ..., n 中 n 个数的序列，找出 0 .. n 中没有出现在序列中的那个数。
+    // eg:          输入: [3,0,1]                       输出: 2
+    //              输入: [9,6,4,2,3,5,7,0,1]           输出: 8
+    // 
+    // 这题的设计规则有点混乱,以下解法都自相矛盾!!!  -- (优解题思路除外)
+    // ***** 当nums长度==1 情况下, [1] => 0  [6] => 7 leetCode希望得到的答案; ****
+    // ****  虽然我这里的解法leetCode都给通过了，但貌似又不符合leetCode的预设! ****
+    //
+
+    (function () {
+        var missingNumber = function (nums) {
+            var sortNums = nums.sort(function (left, right) {
+                return left - right
+            });
+            // 数组长度等于1的情况
+            if (nums.length == 1) {
+                if (nums[0] > 0) {
+                    return nums[0] - 1;
+                } else {
+                    return nums[0] + 1;
+                }
+            }
+
+            // 数组长度大于1的情况
+            for (var i = 0; i < sortNums.length; i++) {
+                if (sortNums[i] != i) {
+                    return i
+                }
+            }
+            return i;
+        };
+
+        var nums = [6];
+        // console.log(missingNumber(nums))
+
+    })();
+
+
+    (function () {
+        var missingNumber = function (nums) {
+            var sortNums = nums.sort(function (left, right) {
+                return left - right
+            });
+
+            // 数组长度大于1的情况
+            for (var i = 0; i < sortNums.length; i++) {
+                if (sortNums[i] != i) {
+                    return i
+                }
+            }
+            // 数组顺序时，直接返回最后一个即可
+            return sortNums.length;
+        };
+
+        var nums = [6];
+        // console.log(missingNumber(nums))
+    })();
+</script>
