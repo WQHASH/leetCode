@@ -1,0 +1,99 @@
+<!--
+ * @Description: 283. 移动零
+ * @Author: wangqi
+ * @Date: 2019-12-22 13:05:12
+ * @LastEditTime : 2019-12-22 14:58:27
+ -->
+<script>
+    // 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+    // eg:          输入: [0,1,0,3,12]          输出: [1,3,12,0,0]
+    // 说明:        1. 必须在原数组上操作，不能拷贝额外的数组。
+    //              2. 尽量减少操作次数。
+
+
+    // 从头部部遍历
+    (function () {
+
+        var moveZeroes = function (nums) {
+            var index = 0;
+            for (var i = 0; i < nums.length; i++) {
+                if (index++ == nums.length - 1) {
+                    return nums;
+                }
+                if (nums[i] == 0) {
+                    nums.push(...nums.splice(i, 1));
+                    i = i - 1;
+                }
+            }
+        };
+        var nums = [0, 1]
+        // console.log(moveZeroes(nums));
+
+    })();
+
+    // 从尾部遍历
+    (function () {
+
+        var moveZeroes = function (nums) {
+            for (var i = nums.length; i--;) {
+                if (!nums[i]) {
+                    nums.push(...nums.splice(i, 1))
+                }
+            }
+            return nums;
+        };
+
+        var nums = [0, 1, 0, 3, 12]
+        // console.log(moveZeroes(nums));
+
+    })();
+
+
+    // 遍历填充法
+    (function () {
+
+        var moveZeroes = function (nums) {
+            var len = nums.length
+            for (var i = 0; i < len; i++) {
+                if (nums[i] == 0) {
+                    nums.splice(i, 1)
+                    i = i - 1;
+                }
+            }
+            for (var j = nums.length; j < len; j++) {
+                nums[j] = 0;
+            }
+            return nums;
+        };
+
+        var nums = [1, 3, 12]
+        // console.log(moveZeroes(nums));
+
+    })();
+
+    // 类似遍历填充法 =>    这种解法在leetCode中通不过
+    (function () {
+
+        var moveZeroes = function (nums) {
+            // 没有0
+            if (nums.indexOf(0) == -1) {
+                return nums;
+            }
+            var len = nums.length
+            var index = 0;
+            for (var i = 0; i < len; i++) {
+                if (nums[i] == 0) {
+                    index = index + 1;
+                    nums.splice(i, 1)
+                    i = i - 1;
+                }
+            }
+            return nums.concat(Array(2).fill(0))
+        };
+
+        var nums = [0, 1, 0, 3, 12]
+        // console.log(moveZeroes(nums));
+
+    })();
+
+</script>
