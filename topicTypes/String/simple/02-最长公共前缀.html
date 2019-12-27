@@ -1,0 +1,61 @@
+<!--
+ * @Description: 14. 最长公共前缀
+ * @Author: wangqi
+ * @Date: 2019-12-27 11:28:56
+ * @LastEditTime : 2019-12-27 13:29:50
+ -->
+<script>
+
+    // 编写一个函数来查找字符串数组中的最长公共前缀。
+    // 如果不存在公共前缀，返回空字符串 ""。
+    //  eg: 输入: ["flower","flow","flight"]        输出: "fl"
+    //      输入: ["dog","racecar","car"]           输出: ""    解释: 输入不存在公共前缀。
+    //      说明:   所有输入只包含小写字母 a-z 。
+
+    (function () {
+
+        /**
+         * @description: 默认第0个和其他的比较 [可以先算出最短的在和其他的比较]
+         * @param {type} 
+         * @return: 
+         */
+        var longestCommonPrefix = function (strs) {
+            var newStr = "";
+            if (!strs.length) {
+                return newStr;
+            }
+            for (var i = 0; i < strs[0].length; i++) {
+                for (var j = 1; j < strs.length; j++) {
+                    if (strs[0][i] != strs[j][i]) {
+                        return newStr;
+                    }
+                }
+                newStr += strs[0][i];
+            }
+            return newStr;
+        };
+        var strs = ["flower", "flow", "flight"];
+        // console.log(longestCommonPrefix(strs));
+
+    })();
+
+    // 优解 => 通过 String.startsWith属性来记录之前匹配的是否在存在,
+    (function () {
+        var longestCommonPrefix = function (strs) {
+            return strs.length > 0 ? strs.reduce((x, y) => {
+                for (let l = x.length, str; l >= 0; --l) {
+                    str = x.substring(0, l);
+                    console.log(str)
+                    if (y.startsWith(str)) {
+                        return str
+                    };
+                }
+            }) : "";
+        };
+
+        var strs = ["lower", "flow", "flight"];
+        longestCommonPrefix(strs)
+        // console.log(longestCommonPrefix(strs));
+    })();
+
+</script>
