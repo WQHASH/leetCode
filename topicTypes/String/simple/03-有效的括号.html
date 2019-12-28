@@ -1,0 +1,79 @@
+<!--
+ * @Description: 20. 有效的括号
+ * @Author: wangqi
+ * @Date: 2019-12-28 09:11:14
+ * @LastEditTime : 2019-12-28 10:17:33
+ -->
+<script>
+
+    // 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+    // 有效字符串需满足：
+    // 左括号必须用相同类型的右括号闭合。
+    // 左括号必须以正确的顺序闭合。
+    // 注意空字符串可被认为是有效字符串。
+    // eg:  输入: "()"              输出: true
+    //      输入: "()[]{}"          输出: true
+    //      输入: "(]"              输出: false
+    //      输入: "([)]"            输出: false
+    //      输入: "{[]}"            输出: true
+
+    (function () {
+        /**
+        * @description: 利用栈的思路（先进先出, 对于删除来处理）
+        * @param {type} 
+        * @return: 
+        */
+        var isValid = function (s) {
+            if (s == "") { return true };
+            var stack = [];
+            for (var i = 0; i < s.length; i++) {
+                if (s[i] == "(" || s[i] == "{" || s[i] == "[") {
+                    stack.unshift(s[i]);
+                } else {
+                    if (stack[0] == "(" && s[i] == ")") {
+                        stack.shift();
+                    } else if (stack[0] == "{" && s[i] == "}") {
+                        stack.shift();
+                    } else if (stack[0] == "[" && s[i] == "]") {
+                        stack.shift();
+                    } else {
+                        return false;
+                    }
+                }
+            }
+            return stack.length == 0;
+        };
+
+        var s = "{[]}";
+        // console.log(isValid(s));
+
+    })();
+
+    (function () {
+
+        var isValid = function (s) {
+            var stack = [];
+            var target = {
+                "(": ")",
+                "{": "}",
+                "[": "]",
+            };
+            for (var i = 0; i < s.length; i++) {
+                if (!stack.length) {
+                    stack.push(s[i]);
+                } else {
+                    if (s[i] === target[stack[stack.length - 1]]) {
+                        stack.pop()
+                    } else {
+                        stack.push(s[i])
+                    }
+                }
+            }
+            return !stack.length;
+        };
+
+        var s = "{[]}";
+        console.log(isValid(s));
+    })();
+
+</script>
