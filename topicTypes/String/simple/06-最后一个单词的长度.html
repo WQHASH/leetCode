@@ -1,0 +1,51 @@
+<!--
+ * @Description: 58. 最后一个单词的长度
+ * @Author: wangqi
+ * @Date: 2020-01-01 11:07:21
+ * @LastEditTime : 2020-01-01 11:51:18
+ -->
+<script>
+    // 给定一个仅包含大小写字母和空格 ' ' 的字符串，返回其最后一个单词的长度。
+    // 如果不存在最后一个单词，请返回 0 。
+    // 说明：一个单词是指由字母组成，但不包含任何空格的字符串。
+    // eg:      输入: "Hello World"         输出: 5
+
+
+    /**
+     * @description: 暴力破解
+     * @param {type} 
+     * @return: 
+     */
+    (function () {
+        var lengthOfLastWord = function (s) {
+            // 无单词，开头结尾多个空格情况
+            if (!s || s.trim() == "") {
+                return 0;
+            };
+            let str = s.trim().split(/\s+/);
+            return str[str.length - 1].length;
+        };
+
+        let s = "Hello World";
+        console.log(lengthOfLastWord(s));
+
+
+    })();
+
+    /**
+     * @description: 优解
+     * @param {type} 
+     * @return: 
+     */
+    (function () {
+        var lengthOfLastWord = function (s) {
+            var a = s.trim().length;
+            var b = s.trim().lastIndexOf(" ");
+            return a - b - 1
+            // return s.trim().length - s.trim().lastIndexOf(" ") - 1;
+        };
+
+        let s = "Hello World";
+        // console.log(lengthOfLastWord("H"));
+    })();
+</script>
