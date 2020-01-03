@@ -1,0 +1,24 @@
+<!--
+ * @Description: 125. 验证回文串
+ * @Author: wangqi
+ * @Date: 2020-01-03 20:57:59
+ * @LastEditTime : 2020-01-03 21:15:07
+ -->
+
+
+<script>
+    // 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
+    // 说明：本题中，我们将空字符串定义为有效的回文串。
+    // eg:  输入: "A man, a plan, a canal: Panama"              输出: true
+    //      输入: "race a car"                                  输出: false
+    (function () {
+        var isPalindrome = function (s) {
+            s = s.replace(/[\W]/g, "").toLocaleLowerCase();
+            var newStr = s.split("").reverse().join("");
+            return s === newStr;
+        };
+        var s = "race a car";
+        console.log(isPalindrome(s));
+
+    })();
+</script>
