@@ -2,7 +2,7 @@
  * @Description: 67. 二进制求和
  * @Author: wangqi
  * @Date: 2020-01-03 20:49:26
- * @LastEditTime : 2020-01-03 20:57:34
+ * @LastEditTime : 2020-01-04 14:16:17
  -->
 <script>
     // 给定两个二进制字符串，返回他们的和（用二进制表示）。
@@ -12,16 +12,34 @@
     (function () {
 
         /**
-         * @description: 
+         * @description: 利用& 位运算 同1则1的思想处理 => [位运算具体可查看readme文档介绍]
          * @param {type} 
          * @return: 
          */
         var addBinary = function (a, b) {
+            a = a.split("").reverse();
+            b = b.split("").reverse();
+            var c = [];
+            var maxLength = Math.max(a.length, b.length);
+            var add = 0;
+            for (var i = 0; i < maxLength; i++) {
+                var sum = (a[i] === undefined ? 0 : Number(a[i])) + (b[i] === undefined ? 0 : Number(b[i])) + add;
+                c[i] = sum & 1;
+                if (sum >= 2) {
+                    add = 1
+                } else {
+                    add = 0;
+                }
+            }
 
+            if (add) {
+                c[maxLength] = 1;
+            }
+            return c.reverse().join("").toString();
         };
 
-        var a = 11;
-        var b = 1;
+        var a = "1111";
+        var b = "1111";
         console.log(addBinary(a, b));
 
 
