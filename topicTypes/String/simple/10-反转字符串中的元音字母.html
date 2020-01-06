@@ -1,0 +1,40 @@
+<!--
+ * @Description: 345. 反转字符串中的元音字母
+ * @Author: wangqi
+ * @Date: 2020-01-06 10:06:30
+ * @LastEditTime : 2020-01-06 10:33:41
+ -->
+<script>
+    // 编写一个函数，以字符串作为输入，反转该字符串中的元音字母。
+    // eg:  输入: "hello"           输出: "holle"
+    //      输入: "leetcode"        输出: "leotcede"
+    // 说明元音字母(区分大小写): aeiouAEIOU
+    (function () {
+
+        var reverseVowels = function (s) {
+            let str = "aeiouAEIOU";
+            s = s.split("");
+            let i = 0, j = s.length - 1;
+            while (i < j) {
+                while (str.indexOf(s[i]) == -1 && i < j) {
+                    i++;
+                }
+                while (str.indexOf(s[j]) == -1 && i < j) {
+                    j--;
+                }
+                if (i >= j) {
+                    break;
+                }
+                [s[i], s[j]] = [s[j], s[i]];
+                i++;
+                j--;
+            }
+            return s.join("");
+        };
+
+        var s = "leetcode";
+        console.log(reverseVowels(s));
+
+    })();
+
+</script>
