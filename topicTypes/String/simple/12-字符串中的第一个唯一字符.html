@@ -2,22 +2,57 @@
  * @Description: 387. 字符串中的第一个唯一字符
  * @Author: wangqi
  * @Date: 2020-01-09 17:50:16
- * @LastEditTime : 2020-01-09 17:51:53
+ * @LastEditTime : 2020-01-09 21:30:19
  -->
 <script>
     // 给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
     // eg:      s = "leetcode"              返回 0.
     //          s = "loveleetcode"          返回 2.
     //  注意事项：您可以假定该字符串只包含小写字母。
+    //  第一个唯一字符： 说明是唯一存在的
+
+
+    // 利用查找匹配法进行查找
     (function () {
 
         var firstUniqChar = function (s) {
-            
+            var set = new Set();
+            for (var i = 0; i < s.length; i++) {
+                if (!set.has(s[i]) && i === s.lastIndexOf(s[i])) {
+                    return i;
+                } else {
+                    set.add(s[i]);
+                }
+            }
+            return -1
         };
-        var s = "";
-        console.log(firstUniqChar(s));
+        var s = "loveleetcode";
+        // console.log(firstUniqChar(s));
 
     })();
 
 
+    // map映射法
+    (function () {
+        var firstUniqChar = function (s) {
+            var obj = {};
+            for (var i = 0; i < s.length; i++) {
+                if (!obj[s[i]]) {
+                    obj[s[i]] = 1;
+                } else {
+                    obj[s[i]] = (++obj[s[i]])
+                }
+            }
+            for (var i = 0; i < s.length; i++) {
+                if (obj[s[i]] == 1) {
+                    return i
+                }
+            }
+            return -1;
+
+        };
+        var s = "leetcode";
+        console.log(firstUniqChar(s));
+
+    })();
 </script>
