@@ -2,7 +2,7 @@
  * @Description: 125. 验证回文串
  * @Author: wangqi
  * @Date: 2020-01-03 20:57:59
- * @LastEditTime : 2020-01-03 21:15:07
+ * @LastEditTime : 2020-01-09 17:48:36
  -->
 
 
@@ -13,6 +13,7 @@
     //      输入: "race a car"                                  输出: false
     (function () {
         var isPalindrome = function (s) {
+            // [\W]/g  即只要不是a-z、A-Z、0-9和_
             s = s.replace(/[\W]/g, "").toLocaleLowerCase();
             var newStr = s.split("").reverse().join("");
             return s === newStr;

@@ -2,7 +2,7 @@
  * @Description: 344. 反转字符串
  * @Author: wangqi
  * @Date: 2020-01-04 10:53:42
- * @LastEditTime : 2020-01-05 12:34:29
+ * @LastEditTime : 2020-01-09 17:44:31
  -->
 <script>
     //  编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
@@ -26,8 +26,13 @@
     // 位置置换破解
     (function () {
         var reverseString = function (s) {
-            
-
+            var left = -1, right = s.length;
+            while (++left < --right) {
+                var temp = s[left];
+                s[left] = s[right];
+                s[right] = temp;
+            }
+            return s;
         };
 
         var s = ["H", "a", "n", "n", "a", "h"];
