@@ -1,0 +1,29 @@
+<!--
+ * @Description: 434. 字符串中的单词数
+ * @Author: wangqi
+ * @Date: 2020-01-13 16:41:05
+ * @LastEditTime : 2020-01-13 17:38:40
+ -->
+<script>
+    // 统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。
+    // 请注意，你可以假定字符串里不包括任何不可打印的字符。
+    //  eg: 输入: "Hello, my name is John"      输出: 5
+
+
+    (function () {
+        var countSegments = function (s) {
+            var num = 0;
+            var arr = s.split(" ");
+            for (let item of arr.values()) {
+                item && (++num);
+            }
+            return num;
+
+        };
+        var s = "Hello, my name is John";   //  5
+        var s1 = ""; // 0
+        console.log(countSegments("  "));
+
+    })();
+
+</script>
