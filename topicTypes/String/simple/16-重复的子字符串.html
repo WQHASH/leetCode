@@ -1,0 +1,57 @@
+<!--
+ * @Description: 459. 重复的子字符串
+ * @Author: wangqi
+ * @Date: 2020-01-16 17:43:46
+ * @LastEditTime : 2020-01-17 09:51:20
+ -->
+<script>
+    // 给定一个非空的字符串，判断它是否可以由它的一个子串重复多次构成。
+    // 给定的字符串只含有小写英文字母，并且长度不超过10000。
+    //eg:       输入: "abab"            输出: True        解释: 可由子字符串 "ab" 重复两次构成。
+    //          输入: "aba"             输出: False
+    //          输入: "abcabcabcabc"    输出: True        解释: 可由子字符串 "abc" 重复四次构成。 (或者子字符串 "abcabc" 重复两次构成。)
+    (function () {
+        /**
+         * @description: 正则处理法
+         * @param {type} 
+         * @return: 
+         */
+        var repeatedSubstringPattern = function (s) {
+            // \1+ 表示多组 ^(\w+) 组成的集合
+            var reg = /^(\w+)\1+$/;
+            return reg.test(s);
+        };
+        var s = "ababab";
+        // console.log(repeatedSubstringPattern(s));
+
+    })();
+
+    /**
+     * @description: 字符串巧利用法
+     * @param {type} 
+     * @return: 
+     */
+    (function () {
+        var repeatedSubstringPattern = function (s) {
+            var str = (s + s).slice(0, -1).includes(s);
+            return str;
+        };
+
+        var s = "abab";
+        // console.log(repeatedSubstringPattern(s));
+    })();
+
+    /**
+     * @description:  周期法
+     * @param {type} 
+     * @return: 
+     */
+    (function () {
+        var repeatedSubstringPattern = function (s) {
+        };
+
+        var s = "abab";
+        // console.log(repeatedSubstringPattern(s));
+    })();
+
+</script>
