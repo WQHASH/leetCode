@@ -1,0 +1,99 @@
+<!--
+ * @Description: 606. 根据二叉树创建字符串
+ * @Author: wangqi
+ * @Date: 2020-02-12 13:45:47
+ * @LastEditTime : 2020-02-12 15:49:01
+ -->
+<script>
+    // 你需要采用前序遍历的方式，将一个二叉树转换成一个由括号和整数组成的字符串。
+    // 空节点则用一对空括号 "()" 表示。而且你需要省略所有不影响字符串与原始二叉树之间的一对一映射关系的空括号对。
+
+    (function () {
+        /**
+        *   改题暂时存在问题??? (创建二叉树和leetCode生成的不一样)
+        * @param {TreeNode} t
+        * @return {string}
+        */
+        var tree2str = function (t) {
+            if (!t) { return '' };
+            var left = tree2str(t.left);
+            var right = tree2str(t.right);
+            var res = `${t.val}`;
+            if (left || right) {
+                res += `${left}`;
+            }
+            if (right) {
+                res += `${right}`;
+            }
+            return res;
+        };
+        var t = {
+            key: 1,
+            left: null,
+            right: {
+                key: 2,
+                left: null,
+                right: {
+                    key: 3,
+                    left: null,
+                    right: {
+                        key: 4,
+                        left: null,
+                        right: null,
+                    }
+                }
+            }
+        };
+        console.log(tree2str(t));
+
+
+    })();
+
+
+    // 创建二叉树
+    (function () {
+
+        function BinaryTree() {
+
+            var Node = function (key) {
+                this.key = key;
+                this.left = null;
+                this.right = null;
+            };
+            var insertNode = function (node, newNode) {
+                if (node.key > newNode.key) {
+                    if (node.left === null) {
+                        node.left = newNode;
+                    } else {
+                        insertNode(node.left, newNode);
+                    }
+                } else {
+                    if (node.right === null) {
+                        node.right = newNode;
+                    } else {
+                        insertNode(node.right, newNode);
+                    }
+                }
+            };
+            this.root = null;
+            this.insert = function (key) {
+                var newNode = new Node(key);
+                if (this.root === null) {
+                    this.root = newNode;
+                } else {
+                    insertNode(this.root, newNode);
+                }
+            };
+        };
+
+        var arr = [1, 2, 3, 4];
+        var binaryTree = new BinaryTree();
+        arr.forEach(function (key) {
+            binaryTree.insert(key);
+        });
+        console.log(binaryTree.root, "root");
+
+    })();
+
+
+</script>
