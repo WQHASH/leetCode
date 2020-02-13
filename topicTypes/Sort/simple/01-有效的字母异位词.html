@@ -1,0 +1,45 @@
+<!--
+ * @Description: 242. 有效的字母异位词
+ * @Author: wangqi
+ * @Date: 2020-02-13 15:40:22
+ * @LastEditTime : 2020-02-13 16:55:13
+ -->
+<script>
+    // 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
+    // as   输入: s = "anagram", t = "nagaram"      输出: true
+    //      输入: s = "rat", t = "car"              输出: false
+    // 说明:    你可以假设字符串只包含小写字母。
+    // 进阶:
+    // 如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？
+    (function () {
+
+        /**
+        * @param {string} s
+        * @param {string} t
+        * @return {boolean}
+        */
+        var isAnagram = function (s, t) {
+            if (s.length != t.length) {
+                return false;
+            }
+            var arr = t.split("");
+            for (var i = 0; i < s.length; i++) {
+                if (arr.length == 0) { return true };
+                if (arr.includes(s[i])) {
+                    arr.splice(arr.indexOf(s[i]), 1);
+                } else {
+                    return false;
+                }
+            }
+            return true;
+
+        };
+        var s = "anagram";
+        var t = "nagaram";
+        console.log(isAnagram(s, t));
+
+    })();
+
+
+
+</script>
