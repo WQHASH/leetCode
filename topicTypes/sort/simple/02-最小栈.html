@@ -1,0 +1,75 @@
+<!--
+ * @Description: 155. 最小栈
+ * @Author: wangqi
+ * @Date: 2020-02-14 10:40:41
+ * @LastEditTime : 2020-02-14 11:21:01
+ -->
+<script>
+    // 设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+    // push(x) --将元素 x 推入栈中。    
+    // pop() --删除栈顶的元素。
+    // top() --获取栈顶元素。
+    // getMin() --检索栈中的最小元素。
+
+    //  as:     MinStack minStack = new MinStack();
+    //          minStack.push(-2);
+    //          minStack.push(0);
+    //          minStack.push(-3);
+    //          minStack.getMin();      -- > 返回 - 3.
+    //          minStack.pop();
+    //          minStack.top();         -- > 返回 0.
+    //          minStack.getMin();      -- > 返回 - 2.
+
+    // 注意 模拟栈中的push 指的是数组的中 unshift 推入一个数, 而不是push;
+
+    (function () {
+        var MinStack = function () {
+            this.arr = [];
+        };
+
+        /** 
+         * @param {number} x
+         * @return {void}
+         */
+        MinStack.prototype.push = function (x) {
+            this.arr.unshift(x);
+        };
+
+        /**
+         * @return {void}
+         */
+        MinStack.prototype.pop = function () {
+            this.arr.splice(0, 1);
+        };
+
+        /**
+         * @return {number}
+         */
+        MinStack.prototype.top = function () {
+            return this.arr[0];
+        };
+
+        /**
+         * @return {number}
+         */
+        MinStack.prototype.getMin = function () {
+            return Math.min(...this.arr);
+            // return Math.min.apply(null, this.arr);
+        };
+
+        var minstack = new MinStack();
+
+        minstack.push(1);
+        minstack.push(5);
+        minstack.push(3);
+        console.log(minstack);
+        minstack.pop();
+        console.log(minstack);
+        console.log(minstack.getMin())
+
+
+
+
+
+    })();
+</script>
