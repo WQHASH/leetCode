@@ -1,0 +1,37 @@
+<!--
+ * @Description: 922. 按奇偶排序数组 II
+ * @Author: wangqi
+ * @Date: 2020-02-16 14:13:12
+ * @LastEditTime: 2020-02-16 14:32:16
+ -->
+<script>
+    // 给定一个非负整数数组 A， A 中一半整数是奇数，一半整数是偶数。
+    // 对数组进行排序，以便当 A[i] 为奇数时，i 也是奇数；当 A[i] 为偶数时， i 也是偶数。
+    // 你可以返回任何满足上述条件的数组作为答案。
+    // as       输入：[4,2,5,7]             输出：[4,5,2,7]
+    //          解释：[4,7,2,5]，[2,5,4,7]，[2,7,4,5] 也会被接受。
+
+    /**
+     * @param {number[]} A
+     * @return {number[]}
+     */
+    var sortArrayByParityII = function (A) {
+        var arrEven = [],
+            arrOdd = [],
+            result = [];
+        for (let [index, value] of A.entries()) {
+            if (value % 2 == 0) {
+                arrEven.push(value);
+            } else {
+                arrOdd.push(value);
+            }
+        }
+        return A.map(function (value, index) {
+            return (index % 2 == 0) ? (result[index] = arrEven.pop()) : (result[index] = arrOdd.pop());
+        });
+
+    };
+
+    var A = [4, 2, 5, 7];
+    console.log(sortArrayByParityII(A));
+</script>
