@@ -1,0 +1,35 @@
+<!--
+ * @Description: 976. 三角形的最大周长
+ * @Author: wangqi
+ * @Date: 2020-02-17 10:38:05
+ * @LastEditTime: 2020-02-17 11:30:26
+ -->
+
+<script>
+    // 给定由一些正数（代表长度）组成的数组 A，返回由其中三个长度组成的、面积不为零的三角形的最大周长。
+    // 如果不能形成任何面积不为零的三角形，返回 0。
+    // as:      输入：[2,1,2]       输出：5
+    //          输入：[1,2,1]       输出：0
+    //          输入：[3,2,3,4]     输出：10
+    //          输入：[3,6,2,3]     输出：8
+    // 提示：               3 <= A.length <= 10000          1 <= A[i] <= 10^6
+    // 三角形形成条件：     任意一边大于其他两边之差，小于其他两边之和           
+
+    /**
+     * @param {number[]} A
+     * @return {number}
+     */
+    var largestPerimeter = function (A) {
+        //给数组A降序排列，最大边小于其他两边和 且 大于其他两边之差 即返回最长周长   (最长)
+        A.sort((a, b) => b - a);
+        for (var i = 0; i < A.length - 2; i++) {
+            if (A[i] < (A[i + 1] + A[i + 2]) && A[i] > (A[i + 1] - A[i + 2])) {
+                return A[i] + A[i + 1] + A[i + 2];
+            }
+        }
+        return 0;
+    };
+    var arr = [3, 6, 2, 3];
+    console.log(largestPerimeter(arr));
+
+</script>
