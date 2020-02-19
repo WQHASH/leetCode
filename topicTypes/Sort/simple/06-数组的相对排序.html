@@ -2,7 +2,7 @@
  * @Description: 1122. 数组的相对排序
  * @Author: wangqi
  * @Date: 2020-02-18 16:36:22
- * @LastEditTime: 2020-02-19 12:34:44
+ * @LastEditTime: 2020-02-19 13:44:42
  -->
 <script>
     // 给你两个数组，arr1 和 arr2，
@@ -20,37 +20,68 @@
     // arr2 中的元素 arr2[i] 各不相同
     // arr2 中的每个元素 arr2[i] 都出现在 arr1 中
 
-    /**
-    * @param {number[]} arr1
-    * @param {number[]} arr2
-    * @return {number[]}
-    */
-    var relativeSortArray = function (arr1, arr2) {
-        var obj = {}, arr2Extend = [], arrLast = [];
-        for (let [key, value] of arr1.entries()) {
-            obj[value] ? (obj[value]++) : (obj[value] = 1);
-        };
-        for (let [key, value] of arr2.entries()) {
-            if (obj.hasOwnProperty(value)) {
-                for (let objKey in obj) {
-                    if (objKey == value) {
-                        arr2Extend.push(...new Array(obj[value]).fill(Number(objKey)));
+    (function () {
+        /**
+        * @param {number[]} arr1
+        * @param {number[]} arr2
+        * @return {number[]}
+        */
+        var relativeSortArray = function (arr1, arr2) {
+            var obj = {}, arr2Extend = [], arrLast = [];
+            for (let [key, value] of arr1.entries()) {
+                obj[value] ? (obj[value]++) : (obj[value] = 1);
+            };
+            for (let [key, value] of arr2.entries()) {
+                if (obj.hasOwnProperty(value)) {
+                    for (let objKey in obj) {
+                        if (objKey == value) {
+                            arr2Extend.push(...new Array(obj[value]).fill(Number(objKey)));
+                        }
                     }
                 }
+            };
+            for (let key in obj) {
+                if (arr2.includes(Number(key))) {
+                    delete obj[key];
+                }
+            };
+            for (let [key, value] of Object.entries(obj)) {
+                arrLast.push(...new Array(value).fill(Number(key)));
             }
-        };
-        for (let key in obj) {
-            if (arr2.includes(Number(key))) {
-                delete obj[key];
-            }
-        };
-        for (let [key, value] of Object.entries(obj)) {
-            arrLast.push(...new Array(value).fill(Number(key)));
-        }
-        return arr2Extend.concat(arrLast);
+            return arr2Extend.concat(arrLast);
 
-    };
-    var arr1 = [2, 21, 43, 38, 0, 42, 33, 7, 24, 13, 12, 27, 12, 24, 5, 23, 29, 48, 30, 31], arr2 = [2, 42, 38, 0, 43, 21];
-    console.log(relativeSortArray(arr1, arr2));
+        };
+        var arr1 = [2, 21, 43, 38, 0, 42, 33, 7, 24, 13, 12, 27, 12, 24, 5, 23, 29, 48, 30, 31], arr2 = [2, 42, 38, 0, 43, 21];
+        console.log(relativeSortArray(arr1, arr2));
+    })();
+
+    // 1. 桶排序?  2.Map数据结构?
+    (function () {
+        /**
+        * @param {number[]} arr1
+        * @param {number[]} arr2
+        * @return {number[]}
+        */
+        var relativeSortArray = function (arr1, arr2) {
+            const map = new Map();
+            for (let i = 0; i < arr2.length; i++) {
+                map.set(arr2[i], i);
+            }
+            arr1.sort((a, b) => {
+                if (map.has(a) && map.has(b)) {
+                    return map.get(a) - map.get(b);
+                } else if (map.has(a)) {
+                    return -1;
+                } else if (map.has(b)) {
+                    return 1;
+                } else {
+                    return a - b;
+                }
+            });
+
+            return arr1;
+        };
+
+    })();
 
 </script>
