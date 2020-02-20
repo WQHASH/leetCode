@@ -2,7 +2,7 @@
  * @Description: 1122. 数组的相对排序
  * @Author: wangqi
  * @Date: 2020-02-18 16:36:22
- * @LastEditTime: 2020-02-19 13:44:42
+ * @LastEditTime: 2020-02-20 13:07:34
  -->
 <script>
     // 给你两个数组，arr1 和 arr2，
@@ -67,6 +67,7 @@
             for (let i = 0; i < arr2.length; i++) {
                 map.set(arr2[i], i);
             }
+            // Array.sort排序: a-b 正序;  b-a 倒叙; (-Infinite -1] 反转;   [0, +Infinite) 正常输出;
             arr1.sort((a, b) => {
                 if (map.has(a) && map.has(b)) {
                     return map.get(a) - map.get(b);
@@ -81,6 +82,8 @@
 
             return arr1;
         };
+        var arr1 = [2, 21, 43, 38, 0, 42, 33, 7, 24, 13, 12, 27, 12, 24, 5, 23, 29, 48, 30, 31], arr2 = [2, 42, 38, 0, 43, 21];
+        console.log(relativeSortArray(arr1, arr2));
 
     })();
 
