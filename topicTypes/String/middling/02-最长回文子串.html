@@ -2,12 +2,13 @@
  * @Description: 5. 最长回文子串
  * @Author: wangqi
  * @Date: 2020-02-24 14:13:07
- * @LastEditTime: 2020-02-24 15:51:54
+ * @LastEditTime: 2020-02-25 15:23:55
  -->
 
 <script>
 
-    {
+    {   // ??????????????????????????????????
+
         // 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
 
         // 示例 1：
@@ -26,13 +27,10 @@
         let longestPalindrome = function (s) {
             if (s.length == 1) { return s };
             let str = "";
+            let arr = [];
             let isPalindrome = s.split("").reverse().join("") == s ? true : false;
+            // for(){}
 
-            // for (let i = 0; i < s.length; i++) {
-            //     if(){
-
-            //     }
-            // }
         };
         let s = "cbbd";
         console.log(longestPalindrome(s));
