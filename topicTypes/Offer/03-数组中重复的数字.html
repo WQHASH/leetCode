@@ -2,7 +2,7 @@
  * @Description: 面试题03. 数组中重复的数字
  * @Author: wangqi
  * @Date: 2020-03-03 19:54:05
- * @LastEditTime: 2020-03-03 19:57:38
+ * @LastEditTime: 2020-03-04 14:45:29
  -->
 
 <script>
@@ -21,18 +21,56 @@
         var findRepeatNumber = function (nums) {
             let obj = {};
             for (let [key, value] of nums.entries()) {
-                if (obj[key]) {
-
+                if (obj[value]) {
+                    obj[value]++;
                 } else {
-
+                    obj[value] = 1;
                 }
+            };
+            for (let [key, value] of Object.entries(obj)) {
+                if (value > 1) { return key };
             }
-
-
         };
 
         let arr = [2, 3, 1, 0, 2, 5, 3];
         console.log(findRepeatNumber(arr));
 
+    }
+
+    {
+        var findRepeatNumber = function (nums) {
+            let map = new Map();
+            for (let [key, value] of nums.entries()) {
+                if (map.get(value) >= 1) {
+                    map.set(value, map.get(value) + 1);
+                } else {
+                    map.set(value, 1);
+                }
+            };
+            let numkey;
+            map.forEach(function (value, key, map) {
+                if (value > 1) numkey = key;
+            });
+            return numkey;
+
+        };
+
+        let arr = [2, 3, 1, 0, 2, 5, 3];
+        console.log(findRepeatNumber(arr));
+    }
+    // 其实根本不用 两层循环来处理; 遍历一次后当再次遇到直接返回即可;
+    {
+        var findRepeatNumber = function (nums) {
+            var hashMap = {};
+            for (var i = 0; i < nums.length; i++) {
+                if (hashMap[nums[i]]) {
+                    return nums[i];
+                }
+                else {
+                    hashMap[nums[i]] = 1;
+                }
+            }
+            return -1;
+        }
     }
 </script>
