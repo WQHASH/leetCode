@@ -1,0 +1,73 @@
+<!--
+ * @Description: 面试题06. 从尾到头打印链表 (简单)
+ * @Author: wangqi
+ * @Date: 2020-03-05 08:53:43
+ * @LastEditTime: 2020-03-05 15:32:04
+ -->
+<script>
+    //  输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
+    //  示例 1：        输入：head = [1,3,2]        输出：[2,3,1]
+    //  限制：           0 <= 链表长度 <= 10000
+
+    // js 实现一个简单链表结构
+    let list = (function () {
+        function Node(element) {
+            this.element = element;   //当前节点的元素
+            this.next = null;         //下一个节点链接
+        };
+        function List() {
+            this.head = new Node('head');     //头节点
+        };
+
+        List.prototype = {
+            find: function (item) {
+                var currNode = this.head;
+                while (currNode.element != item) {
+                    currNode = currNode.next;
+                }
+                return currNode;
+            },
+            insert: function (newElement, item) {
+                var newNode = new Node(newElement);
+                var currNode = this.find(item);
+                newNode.next = currNode.next;
+                currNode.next = newNode;
+            },
+        };
+
+        let list = new List();
+        list.insert("likek", "head"); // 头节点后插入节点 likek
+        list.insert("dawang", "likek"); // likek节点后插入节点 dawang
+        return list;
+    })();
+
+    {
+        /**
+        * Definition for singly-linked list.
+        * function ListNode(val) {
+        *     写这的目的在于告知 链表的val 以及 next 的键名
+        *     this.val = val;
+        *     this.next = null;
+        * }
+        */
+        /**
+         * 本题重点在于对链表结构的理解!! [目前上面的链表结构并不适用改答案]
+         * @param {ListNode} head
+         * @return {number[]}
+         */
+        var reversePrint = function (head) {
+            let list = head;
+            if (list == null) return [];
+            let arr = [];
+            while (list.next != null) {
+                arr.unshift(list.val);
+                list = list.next;
+            }
+            arr.unshift(list.val);
+            return arr;
+        };
+        console.log(reversePrint(list))
+    }
+
+
+</script>
