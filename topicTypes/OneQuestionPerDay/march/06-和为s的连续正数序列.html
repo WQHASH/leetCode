@@ -1,0 +1,70 @@
+<!--
+ * @Description: 面试题57 - II. 和为s的连续正数序列
+ * @Author: wangqi
+ * @Date: 2020-03-06 09:46:08
+ * @LastEditTime: 2020-03-06 16:13:09
+ -->
+
+<script>
+    // 输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。
+    // 序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。
+
+    // 示例 1：
+    // 输入：target = 9     输出：[[2,3,4],[4,5]]
+
+    // 示例 2：
+    // 输入：target = 15    输出：[[1,2,3,4,5],[4,5,6],[7,8]]
+
+    {
+        /** 该方法应该是满足条件的，但是leetCode测试超出时间范围!!
+        * @param {number} target
+        * @return {number[][]}
+        */
+        var findContinuousSequence = function (target) {
+            let arr = [];
+            // 满足和为target的所有数
+            let newA = [];
+            let out = [], inner = [];
+            // target 拆分出的所有加数
+            for (let i = 1; i <= target; i++) {
+                let sum = i;
+                for (let j = i + 1; j <= target; j++) {
+                    sum += j;
+                    if (sum == target) {
+                        arr.unshift(i);
+                        newA.push(arr);
+                    } else if (sum > target) {
+                        sum = i;
+                        arr = [];
+                        continue;
+                    }
+                    arr.push(j);
+                }
+            }
+            // 处理数组为连续的加数
+            for (let [key, val] of newA.entries()) {
+                let firstVal = val[0];
+                for (let [index, value] of val.entries()) {
+                    if (value != firstVal) {
+                        inner = [];
+                        break;
+                    }
+                    firstVal++;
+                    inner.push(value);
+                }
+
+                if (inner.length) {
+                    out.push([...inner])
+                }
+            }
+            return out;
+        };
+
+
+        let target = 15;
+        console.log(findContinuousSequence(target));
+    }
+
+
+
+</script>
