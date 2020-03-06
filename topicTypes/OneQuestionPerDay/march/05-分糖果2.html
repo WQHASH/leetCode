@@ -2,10 +2,9 @@
  * @Description: 1103. 分糖果 II
  * @Author: wangqi
  * @Date: 2020-03-05 15:39:31
- * @LastEditTime: 2020-03-05 17:01:40
+ * @LastEditTime: 2020-03-05 22:18:12
  -->
 <script>
-
     // 排排坐，分糖果。
     // 我们买了一些糖果 candies，打算把它们分给排好队的 n = num_people 个小朋友。
     // 给第一个小朋友 1 颗糖果，第二个小朋友 2 颗，依此类推，直到给最后一个小朋友 n 颗糖果。
@@ -38,23 +37,19 @@
      * @return {number[]}
      */
     var distributeCandies = function (candies, num_people) {
-        let arr = [];
-        arr.length = num_people;
-        let n = 0;
-        for (let i = 0; i < candies.length; i++) {
-            if (i <= num_people) {
-                arr[i] = i + 1;
-            } else {
-                n = i / num_people;
-                current = i+n;
-                i + 1
-            }
+        var result = new Array(num_people).fill(0);
+        // 这里赋值1 因为第一个的人最小赋值为1
+        var i = 1;
+        while (candies > 0) {
+            // temp 能取到的值也只是 num_people的长度 [0, num_people-1]
+            var temp = (i - 1 + num_people) % num_people;
+            result[temp] = result[temp] + (candies > i ? i : candies)
+            candies -= i++;
         }
+        return result;
 
     };
     let candies = 10;
     let num_people = 3;
     console.log(distributeCandies(candies, num_people));
-
-
 </script>
