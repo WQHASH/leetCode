@@ -1,0 +1,42 @@
+<!--
+ * @Description: 543. 二叉树的直径 (简单)
+ * @Author: wangqi
+ * @Date: 2020-03-10 08:41:02
+ * @LastEditTime: 2020-03-10 16:45:07
+ -->
+<script>
+    // 给定一棵二叉树，你需要计算它的直径长度。
+    // 一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过根结点。
+    // 理解：  重点在于利用递归思路, 把二叉树两边最底层的节点记录上
+    /**
+    * Definition for a binary tree node.
+    * function TreeNode(val) {
+    *     this.val = val;
+    *     this.left = this.right = null;
+    * }
+    */
+    /**
+     * @param {TreeNode} root
+     * @return {number}
+     */
+    var diameterOfBinaryTree = function (root) {
+        let max = 0;
+        function dfs(node) {
+            if (!node) return 0;
+            const leftDepth = dfs(node.left);
+            const rightDepth = dfs(node.right);
+            const sum = leftDepth + rightDepth;
+            max < sum ? (max = sum) : null;
+            return Math.max(leftDepth, rightDepth) + 1;
+        }
+        dfs(root);
+        return max;
+
+    };
+
+
+
+
+
+
+</script>
