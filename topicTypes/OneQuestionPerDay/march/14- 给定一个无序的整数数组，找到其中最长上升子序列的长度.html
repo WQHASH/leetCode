@@ -2,7 +2,7 @@
  * @Description: 300. 最长上升子序列(中等)
  * @Author: wangqi
  * @Date: 2020-03-14 10:23:28
- * @LastEditTime: 2020-03-14 11:43:53
+ * @LastEditTime: 2020-03-14 11:44:39
  -->
 <script>
     //  给定一个无序的整数数组，找到其中最长上升子序列的长度。
@@ -28,7 +28,7 @@
                 }
             }
             dp.sort((a, b) => b - a)
-            return dp;
+            return dp[0];
         };
         let arr = [4, 10, 4, 3, 8, 9]; //[4, 10, 4, 3, 8, 9];
         console.log(lengthOfLIS(arr));
