@@ -1,0 +1,91 @@
+<!--
+ * @Description: 1160. 拼写单词
+ * @Author: wangqi
+ * @Date: 2020-03-17 08:22:24
+ * @LastEditTime: 2020-03-17 18:27:10
+ -->
+
+<script>
+    // 给你一份『词汇表』（字符串数组） words 和一张『字母表』（字符串） chars。
+    // 假如你可以用 chars 中的『字母』（字符）拼写出 words 中的某个『单词』（字符串），那么我们就认为你掌握了这个单词。
+    // 注意：每次拼写时，chars 中的每个字母都只能用一次。
+    // 返回词汇表 words 中你掌握的所有单词的 长度之和。
+    //
+    //  示例 1：
+    //      输入：words = ["cat","bt","hat","tree"], chars = "atach"                输出：6
+    //      解释：  可以形成字符串 "cat" 和 "hat"，所以答案是 3 + 3 = 6。
+    //
+    //  示例 2：
+    //      输入：words = ["hello","world","leetcode"], chars = "welldonehoneyr"    输出：10
+    //      可以形成字符串 "hello" 和 "world"，所以答案是 5 + 5 = 10。
+
+    {
+
+        var countCharacters = function (words, chars) {
+            let map = new Map();
+            let count = 0;
+            for (let val of chars) {
+                map.set(val, map.has(val) ? map.get(val) + 1 : 1);
+            }
+            for (let str of words) {
+                if (check(str, new Map(map))) {
+                    count += str.length;
+                }
+            }
+            return count;
+        };
+
+        function check(str, map) {
+            for (let i of str) {
+                if (map.has(i) && map.get(i) > 0) {
+                    map.set(i, map.get(i) - 1);
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        var words = ["cat", "bt", "hat", "tree"], chars = "atach";
+        console.log(countCharacters(words, chars));
+
+    }
+
+    // 改方法能执行成功,但是 leetCode不认 Array.flat() 方法 !!
+    {
+        /**
+        * @param {string[]} words
+        * @param {string} chars
+        * @return {number}
+        */
+        var countCharacters = function (words, chars) {
+            let arr = [];
+            for (let [key, value] of words.entries()) {
+                arr.push([]);
+                for (let i = 0; i < value.length; i++) {
+                    if (chars.includes(value[i])) {
+                        let index = chars.indexOf(value[i]);
+                        let str = chars.slice(index, index + 1)
+                        arr[key].push(str);
+                    } else {
+                        arr[key] = [];
+                        break;
+                    }
+                }
+            }
+            // 数组维度 => 返回的结构有问题 (该例子正确返回 0);
+            // arr += "";
+            // arr = arr.split(",");
+            // for(let i=0; i<arr.length; i++){
+            //     if(arr[i]==""){
+            //         arr.splice(i, 1);
+            //         i=i-1;
+            //     }
+            // }
+            // return arr.length;
+            return arr.flat(Infinity).length;
+        };
+        var words = ["dyiclysmffuhibgfvapygkorkqllqlvokosagyelotobicwcmebnpznjbirzrzsrtzjxhsfpiwyfhzyonmuabtlwin", "ndqeyhhcquplmznwslewjzuyfgklssvkqxmqjpwhrshycmvrb", "ulrrbpspyudncdlbkxkrqpivfftrggemkpyjl", "boygirdlggnh", "xmqohbyqwagkjzpyawsydmdaattthmuvjbzwpyopyafphx", "nulvimegcsiwvhwuiyednoxpugfeimnnyeoczuzxgxbqjvegcxeqnjbwnbvowastqhojepisusvsidhqmszbrnynkyop", "hiefuovybkpgzygprmndrkyspoiyapdwkxebgsmodhzpx", "juldqdzeskpffaoqcyyxiqqowsalqumddcufhouhrskozhlmobiwzxnhdkidr", "lnnvsdcrvzfmrvurucrzlfyigcycffpiuoo", "oxgaskztzroxuntiwlfyufddl", "tfspedteabxatkaypitjfkhkkigdwdkctqbczcugripkgcyfezpuklfqfcsccboarbfbjfrkxp", "qnagrpfzlyrouolqquytwnwnsqnmuzphne", "eeilfdaookieawrrbvtnqfzcricvhpiv", "sisvsjzyrbdsjcwwygdnxcjhzhsxhpceqz", "yhouqhjevqxtecomahbwoptzlkyvjexhzcbccusbjjdgcfzlkoqwiwue", "hwxxighzvceaplsycajkhynkhzkwkouszwaiuzqcleyflqrxgjsvlegvupzqijbornbfwpefhxekgpuvgiyeudhncv", "cpwcjwgbcquirnsazumgjjcltitmeyfaudbnbqhflvecjsupjmgwfbjo", "teyygdmmyadppuopvqdodaczob", "qaeowuwqsqffvibrtxnjnzvzuuonrkwpysyxvkijemmpdmtnqxwekbpfzs", "qqxpxpmemkldghbmbyxpkwgkaykaerhmwwjonrhcsubchs"], chars = "usdruypficfbpfbivlrhutcgvyjenlxzeovdyjtgvvfdjzcmikjraspdfp";
+        // console.log(countCharacters(words, chars));
+    }
+</script>
