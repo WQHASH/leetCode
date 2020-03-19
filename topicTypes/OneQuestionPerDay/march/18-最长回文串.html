@@ -2,11 +2,49 @@
  * @Description: 409. 最长回文串
  * @Author: wangqi
  * @Date: 2020-03-19 13:24:41
- * @LastEditTime: 2020-03-19 13:24:53
+ * @LastEditTime: 2020-03-19 20:14:20
  -->
 <script>
-    {
+    // 给定一个包含大写字母和小写字母的字符串，找到通过这些字母构造成的最长的回文串。
+    // 在构造过程中，请注意区分大小写。比如 "Aa" 不能当做一个回文字符串。
+    //
+    // 注意:
+    // 假设字符串的长度不会超过 1010。
+    // 示例 1:
+    // 输入: "abccccdd"      输出: 7
+    // 
+    // 解释:
+    // 我们可以构造的最长的回文串是"dccaccd", 它的长度是 7。
 
+    //  理解：
+    //      以下的思路在于 如果是奇数那么相对回文数字就多了一个, 
+    //          多了的数用center 中间值表示,    之前的偶数那么刚好都是回文
+    //      每次通过循环map结构center中间值都会重新赋值1, 则也只能存在唯一一个;
+
+    {
+        /**
+        * @param {string} s
+        * @return {number}
+        */
+        var longestPalindrome = function (s) {
+            let map = new Map();
+            let count = 0;
+            let center = 0;
+            for (let v of s) {
+                map.set(v, map.has(v) ? map.get(v) + 1 : 1);
+            }
+            for (let [key, val] of map) {
+                if (val % 2 == 0) {
+                    count += val;
+                } else {
+                    count += val - 1;
+                    center = 1;
+                }
+            }
+            return count + center;
+        };
+        var s = "rac ea car";
+        console.log(longestPalindrome(s));
     }
 
 

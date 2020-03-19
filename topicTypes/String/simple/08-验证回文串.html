@@ -2,9 +2,8 @@
  * @Description: 125. 验证回文串
  * @Author: wangqi
  * @Date: 2020-01-03 20:57:59
- * @LastEditTime : 2020-01-09 17:48:36
+ * @LastEditTime: 2020-03-19 14:22:08
  -->
-
 
 <script>
     // 给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。
@@ -13,8 +12,12 @@
     //      输入: "race a car"                                  输出: false
     (function () {
         var isPalindrome = function (s) {
+            // \w 元字符用于查找单词字符。  单词字符包括：a-z、A-Z、0-9，以及下划线, 包含 _ (下划线) 字符。   
+            //      
             // [\W]/g  即只要不是a-z、A-Z、0-9和_
-            s = s.replace(/[\W]/g, "").toLocaleLowerCase();
+            //
+            // [] 是定义匹配的字符范围。比如[a-zA-Z0-9]表示相应位置的字符要匹配英文字符和数字。[\s*表示空格或者*号]
+            s = s.replace(/\W/g, "").toLocaleLowerCase();
             var newStr = s.split("").reverse().join("");
             return s === newStr;
         };
