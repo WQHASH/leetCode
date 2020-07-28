@@ -1,0 +1,50 @@
+<!--
+ * @Description: 643. 子数组最大平均数 I
+ * @Author: wangqi
+ * @Date: 2020-07-24 11:07:48
+ * @LastEditTime: 2020-07-28 15:38:19
+-->
+<script>
+    {
+        // 给定 n 个整数，找出平均数最大且长度为 k 的连续子数组，并输出该最大平均数。
+        // 示例 1:
+        // 输入: [1,12,-5,-6,50,3], k = 4
+        // 输出: 12.75
+        // 解释: 最大平均数 (12-5-6+50)/4 = 51/4 = 12.75
+        
+        // 注意:
+        // 1 <= k <= n <= 30,000。
+        // 所给数据范围 [-10,000，10,000]。
+
+        /**
+        * @param {number[]} nums
+        * @param {number} k
+        * @return {number}
+        */
+        let findMaxAverage = function (nums, k) {
+            if(nums.length==1){ return nums[0]};
+            let sum = 0;
+            // 初始化记录最大的连续和
+            for (let i = 0; i < k; i++) {
+                sum += nums[i];
+            }
+
+            let tempSum = sum;
+            // 整体窗口向右移动一位, temSum叠加新值,减去数组中第一个值; 比较是否为最大
+            for (let i = k, j = 0; i < nums.length; i++) {
+                tempSum += nums[i];
+                tempSum -= nums[j++];
+                if (tempSum > sum) {
+                    sum = tempSum;
+                }
+            }
+            return sum / k;
+        };
+
+        let nums = [1], k = 4;
+        console.log(findMaxAverage(nums, k));
+
+
+    }
+
+</script>
