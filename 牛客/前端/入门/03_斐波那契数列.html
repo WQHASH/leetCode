@@ -1,0 +1,26 @@
+<!--
+ * @Description: 03_斐波那契数列
+ * @Author: wangqi
+ * @Date: 2021-08-01 09:47:05
+ * @LastEditTime: 2021-08-01 10:17:19
+-->
+
+<script>
+    // 描述
+    // 用 JavaScript 实现斐波那契数列函数,返回第n个斐波那契数。 f(1) = 1, f(2) = 1 等
+
+    let cache = {};
+    function fibonacci(n) {
+        if (n == 1 || n == 2) return 1;
+        // return fibonacci(n - 2) + fibonacci(n - 1);
+
+        if (cache[n]) return cache[n];
+        return fibonacci(n - 2) + fibonacci(n - 1);
+
+
+
+    }
+
+    let result = fibonacci(6);
+    console.log(result, "result");
+</script>

@@ -1,0 +1,39 @@
+<!--
+ * @Description: 02_根据包名，在指定空间中创建对象
+ * @Author: wangqi
+ * @Date: 2021-08-01 09:46:16
+ * @LastEditTime: 2021-08-01 10:04:49
+-->
+
+<script>
+    // 描述
+    // 根据包名，在指定空间中创建对象
+    // 输入描述：
+    // namespace({a: {test: 1, b: 2}}, 'a.b.c.d')
+    // 输出描述：
+    // {a: {test: 1, b: {c: {d: {}}}}}
+
+
+    function namespace(oNamespace, sPackage) {
+        let result = oNamespace;
+        let arr = sPackage.split('.');
+        for (let i of arr) {
+            if (typeof oNamespace[i] !== 'object') {
+                oNamespace[i] = {};
+            }
+            oNamespace = oNamespace[i];
+        }
+        return result;
+    }
+
+    let oNamespace = {
+        a: {
+            test: 1,
+            b: 2
+        }
+    };
+    let sPackage = 'a.b.c.d';
+
+    let obj = namespace(oNamespace, sPackage);
+    console.log(obj);
+</script>
