@@ -1,0 +1,31 @@
+<!--
+ * @Description: 删除数组最后一个元素
+ * @Author: wangqi
+ * @Date: 2021-08-02 09:58:12
+ * @LastEditTime: 2021-08-02 10:04:52
+-->
+
+<script>
+    // 描述
+    // 删除数组 arr 最后一个元素。不要直接修改数组 arr，结果返回新的数组
+    // 示例1
+    // 输入：[1, 2, 3, 4]
+    // 输出：[1, 2, 3]
+
+    {
+        function truncate(arr) {
+            // return arr.slice(0, arr.length - 1);
+            return arr.slice(0, -1);
+        }
+        let arr = [1, 2, 3, 4];
+        let result = truncate(arr);
+        console.log(result);
+    }
+
+    {
+        function truncate(arr) {
+            let newArr = arr.join().split(",");
+            return newArr.pop();
+        }
+    }
+</script>

@@ -1,0 +1,51 @@
+<!--
+ * @Description: 字符串字符统计
+ * @Author: wangqi
+ * @Date: 2021-08-02 09:29:05
+ * @LastEditTime: 2021-08-02 09:46:46
+-->
+
+<script>
+    // 描述
+    // 统计字符串中每个字符的出现频率，返回一个 Object，key 为统计字符，value 为出现频率
+    // 1. 不限制 key 的顺序
+    // 2. 输入的字符串参数不会为空
+    // 3. 忽略空白字符
+
+    // 示例1
+    // 输入：'hello world'
+    // 输出：{h: 1, e: 1, l: 3, o: 2, w: 1, r: 1, d: 1}
+
+
+    {
+        function count(str) {
+            let result = {};
+            str = str.replace(/\s+/g, "");
+            for (let i of str) {
+                if (result[i]) {
+                    result[i] += 1;
+                } else {
+                    result[i] = 1;
+                }
+            }
+            return result;
+        };
+
+        let str = 'hello world';
+        let result = count(str);
+        console.log(result, "result")
+    }
+
+
+    // \s 和 \S 的区别
+    // \s 表示匹配空白字符
+    // \S 表示匹配非空白字符
+
+    {
+        function count(str) {
+            let result = {};
+            str.replace(/\S/g, val => result[val] ? (result[val]++) : (result[val] = 1));
+            return result;
+        }
+    }
+</script>

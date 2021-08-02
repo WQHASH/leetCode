@@ -1,0 +1,24 @@
+<!--
+ * @Description: 数组求和
+ * @Author: wangqi
+ * @Date: 2021-08-02 09:49:24
+ * @LastEditTime: 2021-08-02 09:53:28
+-->
+
+<script>
+    // 描述
+    // 计算给定数组 arr 中所有元素的总和
+    // 输入描述：
+    // 数组中的元素均为 Number 类型
+
+    // 示例1
+    // 输入：[ 1, 2, 3, 4 ]
+    // 输出：10
+
+    function sum(arr) {
+        return arr.reduce((prev, cruent) => prev + cruent, 0);
+    };
+    let arr = [1, 2, 3, 4];
+    let result = sum(arr);
+    console.log(result, "result");
+</script>
