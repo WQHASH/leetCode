@@ -1,0 +1,37 @@
+<!--
+ * @Description: 删除数组第一个元素
+ * @Author: wangqi
+ * @Date: 2021-08-03 09:00:19
+ * @LastEditTime: 2021-08-03 09:12:46
+-->
+
+<script>
+    // 描述
+    // 删除数组 arr 第一个元素。 不要直接修改数组 arr， 结果返回新的数组
+    // 示例1
+    // 输入：[1, 2, 3, 4]
+    // 输出：[2, 3, 4]
+
+
+    {
+        function curtail(arr) {
+            return arr.filter((v, i) => i >= 1 ? v : null)
+        };
+        let arr = [1, 2, 3, 4];
+
+        // let result = curtail(arr);
+        // console.log(result);
+    }
+
+    {
+        function curtail(arr) {
+            let result = [...arr];
+            result.shift();
+            return result
+        };
+        let arr = [1, 2, 3, 4];
+
+        let result = curtail(arr);
+        console.log(result);
+    }
+</script>
