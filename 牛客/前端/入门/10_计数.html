@@ -1,0 +1,40 @@
+<!--
+ * @Description: 计数
+ * @Author: wangqi
+ * @Date: 2021-08-04 09:25:31
+ * @LastEditTime: 2021-08-04 09:30:06
+-->
+<script>
+    // 描述
+    // 统计数组 arr 中值等于 item 的元素出现的次数
+    // 示例1
+    // 输入：[1, 2, 4, 4, 3, 4, 3], 4
+    // 输出：3
+
+
+    {
+        function count(arr, item) {
+            return arr.filter(val => val == item).length
+        };
+
+        let arr = [1, 2, 4, 4, 3, 4, 3];
+        let item = 4;
+        let result = count(arr, item);
+        console.log(result);
+    }
+
+    {
+        function count(arr, item) {
+            let num = 0;
+            for (let v of arr) {
+                v == item ? num++ : null;
+            }
+            return num;
+        };
+
+        // let arr = [1, 2, 4, 4, 3, 4, 3];
+        // let item = 4;
+        // let result = count(arr, item);
+        // console.log(result);
+    }
+</script>
