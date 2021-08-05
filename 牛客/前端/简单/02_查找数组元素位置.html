@@ -1,0 +1,43 @@
+<!--
+ * @Description: 查找数组元素位置
+ * @Author: wangqi
+ * @Date: 2021-08-05 14:33:49
+ * @LastEditTime: 2021-08-05 14:46:28
+-->
+<script>
+    // 描述
+    // 找出元素 item 在给定数组 arr 中的位置
+    // 输出描述：
+    // 如果数组中存在 item， 则返回元素在数组中的位置， 否则返回 - 1
+    // 示例1
+    // 输入：[1, 2, 3, 4], 3
+    // 输出： 2
+
+    {
+        function indexOf(arr, item) {
+            return arr.indexOf(item);
+        }
+
+        let arr = [1, 2, 3, 4];
+        let item = 30;
+        // let result = indexOf(arr, item);
+        // console.log(result)
+    }
+
+    // 需要考虑的情况其实就是游览器不支持indexOf,需要自己手写一个polyfill
+    {
+        function indexOf(arr, item) {
+            for (let [i, v] of arr.entries()) {
+                if (v == item) {
+                    return i
+                }
+            }
+            return -1;
+        }
+
+        let arr = [1, 2, 3, 4];
+        let item = 3;
+        let result = indexOf(arr, item);
+        console.log(result)
+    }
+</script>

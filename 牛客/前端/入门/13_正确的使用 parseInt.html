@@ -1,0 +1,38 @@
+<!--
+ * @Description: FED32 正确的使用 parseInt
+ * @Author: wangqi
+ * @Date: 2021-08-05 11:43:00
+ * @LastEditTime: 2021-08-05 12:00:03
+-->
+
+
+<script>
+    // 描述
+    // 修改 js 代码中 parseInt 的调用方式， 使之通过全部测试用例
+    // 示例1   输入： '12'         输出： 12
+    // 示例2   输入： '12px'       输出： 12
+    // 示例3   输入： '0x12'       输出： 0
+
+    {
+        function parse2Int(num) {
+            function parseInt(num) {
+                return num.match(/(^\d+)/g)[0];
+            }
+            return parseInt(num);
+        }
+
+        // let num = '0x12';
+        // let result = parse2Int(num);
+        // console.log(result);
+    }
+
+    {
+        function parse2Int(num) {
+            return parseInt(num, 10);
+        }
+
+        let num = '0x12';
+        let result = parse2Int(num);
+        console.log(result);
+    }
+</script>

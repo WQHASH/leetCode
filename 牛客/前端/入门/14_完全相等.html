@@ -1,0 +1,29 @@
+<!--
+ * @Description: FED33 完全等同
+ * @Author: wangqi
+ * @Date: 2021-08-05 12:01:03
+ * @LastEditTime: 2021-08-05 12:20:04
+-->
+
+<script>
+    // 描述
+    // 判断 val1 和 val2 是否完全等同
+
+
+    {
+        function identity(val1, val2) {
+            return val1 === val2
+        }
+    }
+
+
+    {
+        function useArguments(...res) {
+            return res.reduce((preV, currV) => preV + currV, 0)
+        }
+
+
+        let s = useArguments(1, 2, 3, 4);
+        console.log(s)
+    }
+</script>

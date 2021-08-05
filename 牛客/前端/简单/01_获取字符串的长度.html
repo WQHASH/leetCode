@@ -1,0 +1,75 @@
+<!--
+ * @Description:FED8 获取字符串的长度
+ * @Author: wangqi
+ * @Date: 2021-08-05 13:48:15
+ * @LastEditTime: 2021-08-05 14:30:22
+-->
+<script>
+    {
+
+        // 描述
+        // 如果第二个参数 bUnicode255For1 === true， 则所有字符长度为 1
+        // 否则如果字符 Unicode 编码 > 255 则长度为 2
+        // 示例1
+        // 输入： 'hello world, 牛客', false
+        // 输出： 17
+
+        function strLength(s, bUnicode255For1) {
+            if (bUnicode255For1) {
+                return s.length;
+            }
+            let wordLen = 0;
+            for (let v of s) {
+                if (v.charCodeAt(v) > 255) {
+                    wordLen += 2
+                } else {
+                    wordLen++;
+                }
+            }
+
+            return wordLen;
+        };
+
+
+        // let reuslt = strLength('', false);
+        // console.log(reuslt)
+    }
+
+    {
+
+        function strLength(s, bUnicode255For1) {
+            if (bUnicode255For1) {
+                return s.length;
+            }
+            let wordLen = 0;
+            let reg = /[\u4E00-\u9FFF]+/;
+            for (let v of s) {
+                if (reg.test(v)) {
+                    wordLen = wordLen + 2
+                } else {
+                    wordLen = wordLen + 1;
+                }
+
+            }
+            return wordLen;
+        };
+
+
+        let reuslt = strLength('一二三四五', false);
+        console.log(reuslt)
+    }
+
+
+    // 因为s的长度可以直接求出，差别只是 如果s中存在汉字需要在当前基础上加一（每个汉字+1）
+    {
+        function strLength(s, bUnicode255For1) {
+            let len = s.length
+            if (bUnicode255For1 !== true) {
+                for (let i in s) {
+                    if (s.charCodeAt(i) > 255) len++
+                }
+            }
+            return len
+        }
+    }
+</script>
