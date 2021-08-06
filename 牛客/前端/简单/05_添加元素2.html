@@ -1,0 +1,39 @@
+<!--
+ * @Description: FED25 添加元素
+ * @Author: wangqi
+ * @Date: 2021-08-06 09:54:17
+ * @LastEditTime: 2021-08-06 10:00:28
+-->
+
+
+<script>
+    // 描述
+    // 在数组 arr 的 index 处添加元素 item。 不要直接修改数组 arr， 结果返回新的数组
+    // 示例1
+    // 输入：[1, 2, 3, 4], 'z', 2
+    // 输出：[1, 2, 'z', 3, 4] 
+    {
+        function insert(arr, item, index) {
+            let result = arr.slice();
+            result.splice(index, 0, item);
+            return result;
+        }
+        let arr = [1, 2, 3, 4];
+        let item = 'z';
+        let index = 2;
+        // let result = insert(arr, item, index);
+        // console.log(result)
+    }
+
+
+    {
+        function insert(arr, item, index) {
+            return arr.slice(0, index).concat(item, arr.slice(index));
+        }
+        let arr = [1, 2, 3, 4];
+        let item = 'z';
+        let index = 2;
+        let result = insert(arr, item, index);
+        console.log(result)
+    }
+</script>

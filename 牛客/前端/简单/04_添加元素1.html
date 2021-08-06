@@ -1,0 +1,40 @@
+<!--
+ * @Description: FED20 添加元素
+ * @Author: wangqi
+ * @Date: 2021-08-06 09:43:35
+ * @LastEditTime: 2021-08-06 09:48:44
+-->
+
+<script>
+    // 描述
+    // 在数组 arr 末尾添加元素 item。 不要直接修改数组 arr， 结果返回新的数组
+    // 示例1
+    // 输入：[1, 2, 3, 4], 10
+    // 输出：[1, 2, 3, 4, 10]
+
+    {
+        function append(arr, item) {
+            let result = arr.slice(0);
+            result.push(item);
+            return result;
+        }
+
+        let arr = [1, 2, 3, 4];
+        let item = 10;
+        // let result = append(arr, item);
+        // console.log(result)
+    }
+
+
+    {
+        function append(arr, item) {
+            // return [...arr, item];
+            return arr.concat(item);
+        }
+
+        let arr = [1, 2, 3, 4];
+        let item = 10;
+        let result = append(arr, item);
+        console.log(result)
+    }
+</script>

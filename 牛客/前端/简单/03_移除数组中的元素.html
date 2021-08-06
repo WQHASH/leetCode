@@ -1,0 +1,25 @@
+<!--
+ * @Description: FED18 移除数组中的元素
+ * @Author: wangqi
+ * @Date: 2021-08-06 09:29:41
+ * @LastEditTime: 2021-08-06 09:43:15
+-->
+
+<script>
+    // 描述
+    // 移除数组 arr 中的所有值与 item 相等的元素。 不要直接修改数组 arr， 结果返回新的数组
+    // 示例1
+    // 输入：[1, 2, 3, 4, 2], 2
+    // 输出：[1, 3, 4]
+    {
+        function remove(arr, item) {
+            return arr.filter((val) => val !== item);
+        };
+
+        let arr = [1, 2, 3, 4, 2];
+        let item = 2;
+        let result = remove(arr, item);
+        console.log(result, "result")
+
+    }
+</script>
